@@ -2,6 +2,6 @@
 	"elements":
 	[
 		{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID:" }
-    		{ "name": "Double", "type": "CheckBox", "caption": "Left/Right:" }
+    		
 	]
 }
