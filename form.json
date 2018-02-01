@@ -1,0 +1,7 @@
+{
+	"elements":
+	[
+		{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID:" }
+    { "name": "Left/Right", "type": "ValidationTextBox", "caption": "Left:" }
+	]
+}
