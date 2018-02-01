@@ -1,0 +1,14 @@
+{
+	"id": "{E5AA629B-75BD-45C0-9BCB-845C102B0411}",
+	"name": "FTS12",
+	"type": 3,
+	"vendor": "",
+	"aliases": 
+	[
+		"FTS12"
+	],
+	"parentRequirements": ["{70E3075F-A35D-4DEB-AC20-C929A156FE48}"],
+	"childRequirements": [],
+	"implemented": ["{DE2DA2C0-7A28-4D23-A9AA-6D1C7609C7EC}"],
+	"prefix": "Eltako"
+}
