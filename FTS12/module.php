@@ -41,10 +41,10 @@
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
-			IPS_LogMessage("FTS12 Device ID (HEX)",FTS_String2Hex($data->{'DeviceID'}));
+			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			
 			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
-			if (strcmp(FTS_String2Hex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
+			if (strcmp($data->{'DeviceID'}, $this->ReadPropertyString("DeviceID")) === 0)
 			{
 				$this->CalcProcessValues($data);
 			}
