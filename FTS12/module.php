@@ -80,6 +80,9 @@
 				SetValue($this->GetIDForIdent("Pressed"), false);
 			}
 			// zeitpunkt loslassen auswerten
+			
+			IPS_LogMessage("FTS12 Device",IPS_GetVariable($this->GetIDForIdent("Pressed"))->{'VariableChanged'});
+			IPS_LogMessage("FTS12 Device",IPS_GetVariable($this->GetIDForIdent("Pressed"))->{'VariableUpdated'});
 				
 	
 		}
