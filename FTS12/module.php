@@ -70,6 +70,8 @@
 			IPS_LogMessage("FTS12 Device Data 10",$spezData->{'DataByte10'});
 			IPS_LogMessage("FTS12 Device Data 11",$spezData->{'DataByte11'});
 			IPS_LogMessage("FTS12 Device Data 12",$spezData->{'DataByte12'});
+			IPS_LogMessage("FTS12 Device Data 13",$spezData->{'DataByte13'});
+			IPS_LogMessage("FTS12 Device Data 14",$spezData->{'DataByte14'});
 			
 	
 		}
