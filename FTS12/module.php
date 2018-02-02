@@ -41,7 +41,7 @@
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
-			if (strcmp(String2Hex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
+			if (strcmp(FTS_String2Hex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
 			{
 				$this->CalcProcessValues($data);
 			}
