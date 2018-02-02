@@ -137,7 +137,7 @@
 			}
 		} 
 		
-		function String2Hex($daten)
+		private function String2Hex($daten)
 		{
 			$hex = "";
 			for($i=0; $i<strlen($daten); $i++)
@@ -145,7 +145,7 @@
 			return $hex;
 		}
 
-		function Hex2String($hex){
+		private function Hex2String($hex){
 		    $string='';
 		    for ($i=0; $i < strlen($hex)-1; $i+=2){
 			$string .= chr(hexdec($hex[$i].$hex[$i+1]));
