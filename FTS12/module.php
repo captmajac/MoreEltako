@@ -142,7 +142,7 @@
 		
 		private function String2Hex($daten)
 		{
-			$hex = "";
+			$hex = '';
 			for($i=0; $i<strlen($daten); $i++){
 				$hex .= sprintf("%02X ", ord($daten[$i]));
 			}
