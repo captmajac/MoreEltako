@@ -48,7 +48,7 @@
 			// prüfen ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
 			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
 			   and 
-			   strcmp(dechex($data->{'Data0'}), $this->ReadPropertyString("DataByte0")) === 0)
+			   strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
 			{
 				$this->ProcessData($data);
 			}
