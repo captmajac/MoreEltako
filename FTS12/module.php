@@ -58,7 +58,7 @@
 		private function ProcessData($spezData)
 		{ 	// daten auswerten
 			IPS_LogMessage("FTS12 Device","gedrückt");
-			$this->SetValueBoolean(GetIDForIdent("Pressed"), true);
+			SetValue($this->GetIDForIdent("Pressed"), true);
 				
 	
 		}
