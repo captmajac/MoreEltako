@@ -6,6 +6,7 @@
 			//Never delete this line!
 			parent::Create();
 			$this->RegisterPropertyString("DeviceID", "");
+			$this->RegisterPropertyString("Data0", "");
 		}
     
 		public function ApplyChanges()
@@ -43,10 +44,14 @@
 			
 			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			
-			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
-			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
+			// prüfen ob enocean id gleich der device id ist. in HEX
+			// prüfen ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
+			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
+			   and 
+			   strcmp(dechex($data->{'Data0'}), $this->ReadPropertyString("DataByte0")) === 0)
+			   )
 			{
-				$this->CalcProcessValues($data);
+				$this->ProcessData($data);
 			}
 			else IPS_LogMessage("FTS12 Device IDs",
 								"Enocean DeviceID: " . dechex($data->{'DeviceID'}) . 
@@ -55,22 +60,10 @@
 			
 		}
 		
-		private function CalcProcessValues($spezData)
-		{ // daten auswerten
-			IPS_LogMessage("FTS12 Device Data 0",$spezData->{'DataByte0'});
-			IPS_LogMessage("FTS12 Device Data 1",$spezData->{'DataByte1'});
-			IPS_LogMessage("FTS12 Device Data 2",$spezData->{'DataByte2'});
-			IPS_LogMessage("FTS12 Device Data 3",$spezData->{'DataByte3'});
-			IPS_LogMessage("FTS12 Device Data 4",$spezData->{'DataByte4'});
-			IPS_LogMessage("FTS12 Device Data 5",$spezData->{'DataByte5'});
-			IPS_LogMessage("FTS12 Device Data 6",$spezData->{'DataByte6'});
-			IPS_LogMessage("FTS12 Device Data 7",$spezData->{'DataByte7'});
-			IPS_LogMessage("FTS12 Device Data 8",$spezData->{'DataByte8'});
-			IPS_LogMessage("FTS12 Device Data 9",$spezData->{'DataByte9'});
-			IPS_LogMessage("FTS12 Device Data 10",$spezData->{'DataByte10'});
-			IPS_LogMessage("FTS12 Device Data 11",$spezData->{'DataByte11'});
-			IPS_LogMessage("FTS12 Device Data 12",$spezData->{'DataByte12'});
-			
+		private function ProcessData($spezData)
+		{ 	// daten auswerten
+			IPS_LogMessage("FTS12 Device","gedrückt");
+				
 	
 		}
 		
