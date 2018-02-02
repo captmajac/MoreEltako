@@ -61,6 +61,16 @@
 			IPS_LogMessage("FTS12 Device Data 1",$spezData->{'DataByte1'});
 			IPS_LogMessage("FTS12 Device Data 2",$spezData->{'DataByte2'});
 			IPS_LogMessage("FTS12 Device Data 3",$spezData->{'DataByte3'});
+			IPS_LogMessage("FTS12 Device Data 4",$spezData->{'DataByte4'});
+			IPS_LogMessage("FTS12 Device Data 5",$spezData->{'DataByte5'});
+			IPS_LogMessage("FTS12 Device Data 6",$spezData->{'DataByte6'});
+			IPS_LogMessage("FTS12 Device Data 7",$spezData->{'DataByte7'});
+			IPS_LogMessage("FTS12 Device Data 8",$spezData->{'DataByte8'});
+			IPS_LogMessage("FTS12 Device Data 9",$spezData->{'DataByte9'});
+			IPS_LogMessage("FTS12 Device Data 10",$spezData->{'DataByte10'});
+			IPS_LogMessage("FTS12 Device Data 11",$spezData->{'DataByte11'});
+			IPS_LogMessage("FTS12 Device Data 12",$spezData->{'DataByte12'});
+			
 	
 		}
 		
