@@ -17,8 +17,6 @@
 			$this->RegisterVariableBoolean("Pressed", "Pressed");
 	
 
-			
-			
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 		}
