@@ -14,7 +14,7 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$$this->RegisterPropertyBoolean("Pressed", false);
+			$this->RegisterPropertyBoolean("Pressed", false);
 	
 
 			
