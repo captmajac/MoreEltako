@@ -49,7 +49,6 @@
 			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
 			   and 
 			   strcmp(dechex($data->{'Data0'}), $this->ReadPropertyString("DataByte0")) === 0)
-			   )
 			{
 				$this->ProcessData($data);
 			}
