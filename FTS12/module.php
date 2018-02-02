@@ -57,40 +57,11 @@
 		
 		private function CalcProcessValues($spezData)
 		{ // daten auswerten
-			// temperature = tempValue / 250 * 40 °C
-			$temperature = floatval($spezData->{'DataByte1'}); 
-			$temperature = $temperature / 250 * 40;
-			
-			// humidity = humValue / 250 * 100 %
-			$humidity = floatval($spezData->{'DataByte2'}); 
-			$humidity = $humidity / 250 * 100;
-			
-			// goldCapVoltage = voltageValue / 255 * 1,8V * 4 - usually DataByte3 is not used in enocean standard!
-			$goldCapVoltage = floatval($spezData->{'DataByte3'});
-			$goldCapVoltage = $goldCapVoltage / 255 * 1.8 * 4;
-			
-			// Calc dewpoint and abs. humidity with Magnus coefficients
-			$c1 = 6.1078; 							// hPa
-			$c2 = 17.08085;                  // °C
-			$c3 = 234.175;                   // °C
-			$mw = 18.016;                    // g/mol
-			$uniGasConstant = 8.3144598;    	// J/(mol*K)
-			$tempInK = $temperature + 273.15;
-			// Calculate saturationVaporPressure in hPa
-			$saturationVaporPressure = $c1 * exp(($c2 * $temperature) / ($c3 + $temperature));
-			// Calculate vaporPressure in hPa
-			$vaporPressure = $saturationVaporPressure *  $humidity / 100;
-			// Calculate dewpoint in °C
-			$dewpoint = (log($vaporPressure / $c1) * $c3) / ($c2 - log($saturationVaporPressure / $c1));
-			// Calculate absolute humidity in g/m³
-			$absHum = $mw / $uniGasConstant * $vaporPressure / $tempInK * 100;
-			
-			// Write calculated values to registered variables
-			$this->SetValueFloat("TMP", $temperature);
-			$this->SetValueFloat("HUM", $humidity);
-			$this->SetValueFloat("VLT", $goldCapVoltage);
-			$this->SetValueFloat("AHUM", $absHum);
-			$this->SetValueFloat("DEW", $dewpoint);
+			IPS_LogMessage("FTS12 Device Data 0",$spezData->{'DataByte0'});
+			IPS_LogMessage("FTS12 Device Data 1",$spezData->{'DataByte1'});
+			IPS_LogMessage("FTS12 Device Data 2",$spezData->{'DataByte2'});
+			IPS_LogMessage("FTS12 Device Data 3",$spezData->{'DataByte3'});
+	
 		}
 		
 		private function SetValueFloat($Ident, $value)
