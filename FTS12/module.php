@@ -46,23 +46,43 @@
 			   and 
 			   strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
 			{
-				$this->ProcessData($data);
+				$this->ProcessPress($data);
 			}
-			else IPS_LogMessage("FTS12 Device IDs",
-								"Enocean DeviceID: " . dechex($data->{'DeviceID'}) . 
-							    " and SymconModul DeviceID: " . $this->ReadPropertyString("DeviceID") . 
-								" are not equal");
+			else if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
+			   and 
+			   strcmp(dechex($data->{'DataByte0'}), "0" === 0)
+			{
+				$this->ProcessRelease($data);
+			}
+			//else IPS_LogMessage("FTS12 Device IDs",
+			//					"Enocean DeviceID: " . dechex($data->{'DeviceID'}) . 
+			//				    " and SymconModul DeviceID: " . $this->ReadPropertyString("DeviceID") . 
+			//					" are not equal");
 			
 		}
 		
-		private function ProcessData($spezData)
-		{ 	// daten auswerten
+		private function ProcessPress($spezData)
+		{ 	// daten auswerten taste gedrückt
 			IPS_LogMessage("FTS12 Device","gedrückt");
 			SetValue($this->GetIDForIdent("Pressed"), true);
+			
+			// todo zeitpunkt des drückens merken
+	
+		}
+
+		private function ProcessRelease($spezData)
+		{ 	// daten auswerten taste losgelassen
+			// prüfen ob vorher pressed auch true war nur dann wurde auch der taster gedrückt
+			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
+			IPS_LogMessage("FTS12 Device","losgelassen");
+			if (GetValue($this->GetIDForIdent("Pressed")==true)
+			{    
+				SetValue($this->GetIDForIdent("Pressed"), false);
+			}
+			// zeitpunkt loslassen auswerten
 				
 	
 		}
-		
 		private function SetValueFloat($Ident, $value)
 		{
 			$id = $this->GetIDForIdent($Ident);
