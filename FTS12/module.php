@@ -40,6 +40,9 @@
 		{
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
+			
+			IPS_LogMessage("FTS12 Device ID (HEX)",FTS_String2Hex($data->{'DeviceID'}));
+			
 			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
 			if (strcmp(FTS_String2Hex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
 			{
@@ -140,17 +143,19 @@
 		private function String2Hex($daten)
 		{
 			$hex = "";
-			for($i=0; $i<strlen($daten); $i++)
-			$hex .= sprintf("%02X ", ord($daten[$i]));
+			for($i=0; $i<strlen($daten); $i++){
+				$hex .= sprintf("%02X ", ord($daten[$i]));
+			}
 			return $hex;
 		}
 
-		private function Hex2String($hex){
-		    $string='';
-		    for ($i=0; $i < strlen($hex)-1; $i+=2){
+		private function Hex2String($hex)
+		{
+			$string='';
+			for ($i=0; $i < strlen($hex)-1; $i+=2){
 			$string .= chr(hexdec($hex[$i].$hex[$i+1]));
-		    }
-		    return $string;
+			}
+			return $string;
 		}
 	}
 ?>
