@@ -50,7 +50,7 @@
 			}
 			else if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
 			   and 
-			   strcmp(dechex($data->{'DataByte0'}), "0" === 0)
+			   strcmp(dechex($data->{'DataByte0'}), "0") === 0)
 			{
 				$this->ProcessRelease($data);
 			}
