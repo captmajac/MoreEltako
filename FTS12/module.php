@@ -14,10 +14,8 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			//$this->RegisterProfileFloat("AbsHumidity", "", "", " g/m³", NULL, NULL, NULL, 2);
-
-			
-			//$this->RegisterVariableFloat("HUM", "Rel. Luftfeuchtigkeit", "RelHumidity", 0);
+			$$this->RegisterPropertyBoolean("Pressed", false);
+	
 
 			
 			
@@ -62,6 +60,7 @@
 		private function ProcessData($spezData)
 		{ 	// daten auswerten
 			IPS_LogMessage("FTS12 Device","gedrückt");
+			$this->SetValueFloat("Pressed", true);
 				
 	
 		}
