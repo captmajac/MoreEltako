@@ -14,7 +14,7 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Pressed", "Taste gedrückt");
+			$this->RegisterVariableBoolean("Pressed", "Pressed");
 	
 
 			
@@ -60,7 +60,7 @@
 		private function ProcessData($spezData)
 		{ 	// daten auswerten
 			IPS_LogMessage("FTS12 Device","gedrückt");
-			$this->SetValueBoolean("Pressed", true);
+			$this->SetValue("Pressed", true);
 				
 	
 		}
