@@ -44,12 +44,12 @@
 			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			
 			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
-			if (strcmp($data->{'DeviceID'}, $this->ReadPropertyString("DeviceID")) === 0)
+			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0)
 			{
 				$this->CalcProcessValues($data);
 			}
 			else IPS_LogMessage("FTS12 Device IDs",
-								"Enocean DeviceID: " . $data->{'DeviceID'} . 
+								"Enocean DeviceID: " . dechex($data->{'DeviceID'}) . 
 							    " and SymconModul DeviceID: " . $this->ReadPropertyString("DeviceID") . 
 								" are not equal");
 			
