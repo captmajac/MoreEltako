@@ -41,7 +41,7 @@
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			// Check if received enocean deviceID is equal to entered deviceID in moduel configuration
-			if (strcmp($data->{'DeviceID'}, $this->ReadPropertyString("DeviceID")) === 0)
+			if (strcmp($data->{'DeviceID'}, String2Hex($this->ReadPropertyString("DeviceID"))) === 0)
 			{
 				$this->CalcProcessValues($data);
 			}
@@ -136,5 +136,21 @@
 			    parent::SendDebug($Message, $Data, $Format);
 			}
 		} 
+		
+		function String2Hex($daten)
+		{
+			$hex = "";
+			for($i=0; $i<strlen($daten); $i++)
+			$hex .= sprintf("%02X ", ord($daten[$i]));
+			return $hex;
+		}
+
+		function Hex2String($hex){
+		    $string='';
+		    for ($i=0; $i < strlen($hex)-1; $i+=2){
+			$string .= chr(hexdec($hex[$i].$hex[$i+1]));
+		    }
+		    return $string;
+		}
 	}
 ?>
