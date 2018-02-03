@@ -15,6 +15,8 @@
 			parent::ApplyChanges();
 			
 			$this->RegisterVariableBoolean("Pressed", "Pressed");
+			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
+			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
 	
 
 			//Connect to available enocean gateway
@@ -65,6 +67,8 @@
 		{ 	// daten auswerten taste gedrückt
 			IPS_LogMessage("FTS12 Device","gedrückt");
 			SetValue($this->GetIDForIdent("Pressed"), true);
+			SetValue($this->GetIDForIdent("PressedLong"), false);
+			SetValue($this->GetIDForIdent("PressedShort"), false);
 			
 			// todo zeitpunkt des drückens merken
 	
@@ -83,9 +87,12 @@
 			{    
 				SetValue($this->GetIDForIdent("Pressed"), false);
 			}
-			// zeitpunkt loslassen auswerten
+			// zeitpunkt loslassen auswerten und lange oder kurzen tastendruck aktualisieren
+			if ($diff >2)	
+				SetValue($this->GetIDForIdent("PressedLong"), true);
+			else
+				SetValue($this->GetIDForIdent("PressedShort"), true);
 			
-			IPS_LogMessage("FTS12 Device Dauer Tastendruck",$diff);
 				
 	
 		}
