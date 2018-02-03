@@ -33,51 +33,45 @@
 		*{
 		*	$this->SendDataToParent(json_encode(Array("DataID" => "{B87AC955-F258-468B-92FE-F4E0866A9E18}", "Buffer" => $Text)));
 		*}
-   	*/
+   		*/
 		
 		public function ReceiveData($JSONString)
 		{
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
-			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
+			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
+			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
 			
-			// prüfen ob enocean id gleich der device id ist. in HEX
-			// prüfen ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
+			// prüfen ob enocean id gleich der device id in HEX und
+			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
 			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
 			   and 
 			   strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
 			{
 				$this->ProcessPress($data);
 			}
+			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
+			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
+			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
 			else if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
 			and strcmp(dechex($data->{'DataByte0'}), "0") === 0
 			and GetValue($this->GetIDForIdent("Pressed"))==true)
 			{
 				$this->ProcessRelease($data);
-			}
-			//else IPS_LogMessage("FTS12 Device IDs",
-			//					"Enocean DeviceID: " . dechex($data->{'DeviceID'}) . 
-			//				    " and SymconModul DeviceID: " . $this->ReadPropertyString("DeviceID") . 
-			//					" are not equal");
-			
+			}			
 		}
 		
-		private function ProcessPress($spezData)
-		{ 	// daten auswerten taste gedrückt
+		private function ProcessPress($Data)
+		{ 	// daten auswerten ->taste gedrückt
 			IPS_LogMessage("FTS12 Device","gedrückt");
 			SetValue($this->GetIDForIdent("Pressed"), true);
 			SetValue($this->GetIDForIdent("PressedLong"), false);
 			SetValue($this->GetIDForIdent("PressedShort"), false);
-			
-			// todo zeitpunkt des drückens merken
-	
 		}
 
-		private function ProcessRelease($spezData)
-		{ 	// daten auswerten taste losgelassen
-			// prüfen ob vorher pressed auch true war nur dann wurde auch der taster gedrückt
+		private function ProcessRelease($Data)
+		{ 	// daten auswerten ->taste losgelassen
 			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
 			IPS_LogMessage("FTS12 Device","losgelassen");
 			
@@ -96,11 +90,6 @@
 			
 				
 	
-		}
-		private function SetValueFloat($Ident, $value)
-		{
-			$id = $this->GetIDForIdent($Ident);
-			SetValueFloat($id, floatval($value));
 		}
 		
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
@@ -144,22 +133,6 @@
 			}
 		} 
 		
-		private function String2Hex($daten)
-		{
-			$hex = '';
-			for($i=0; $i<strlen($daten); $i++){
-				$hex .= sprintf("%02X ", ord($daten[$i]));
-			}
-			return $hex;
-		}
-
-		private function Hex2String($hex)
-		{
-			$string='';
-			for ($i=0; $i < strlen($hex)-1; $i+=2){
-			$string .= chr(hexdec($hex[$i].$hex[$i+1]));
-			}
-			return $string;
-		}
+	
 	}
 ?>
