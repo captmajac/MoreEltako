@@ -75,13 +75,17 @@
 			// prüfen ob vorher pressed auch true war nur dann wurde auch der taster gedrückt
 			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
 			IPS_LogMessage("FTS12 Device","losgelassen");
+			
+			// zeit different ausrechnen für kurzer langer tastendruck
+			$diff= microtime(true) - IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated'];
+			
 			if (GetValue($this->GetIDForIdent("Pressed"))==true)
 			{    
 				SetValue($this->GetIDForIdent("Pressed"), false);
 			}
 			// zeitpunkt loslassen auswerten
 			
-			IPS_LogMessage("FTS12 Device",IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated']);
+			IPS_LogMessage("FTS12 Device Dauer Tastendruck",$diff);
 				
 	
 		}
