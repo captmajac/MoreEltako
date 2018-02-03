@@ -41,6 +41,7 @@
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
 			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
+			IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
 			
 			// prüfen ob enocean id gleich der device id ist. in HEX
 			// prüfen ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
