@@ -4,9 +4,12 @@ Eltako IPS Modul für FTS12 Aktor (Inspiriert von WLSource/SymconEnoceanModul)
 Das Eltakto Tastermodul ist von IPS nicht unterstützt. Dieses Modul soll den Tasterstatus als Bool Statusvariablen ausgeben und eine festlegbare unterscheidung zwischen einem kurzen und langem Tastendruck
 
 # Variablen
-Pressed - Solange true solange der Taster festgehalten wird
-PressedLong - true gesetzt nach loslassen des Tasters wenn der Tastendruck kurz <2 Sek. war. PressedShort ist dann false 
-PressedShort - true gesetzt nach loslassen des Tasters wenn der Tastendruck kurz >2 Sek. war. PressedLong ist dann false 
+1. Pressed
+Solange true solange der Taster festgehalten wird
+2. PressedLong
+true gesetzt nach loslassen des Tasters wenn der Tastendruck kurz <2 Sek. war. PressedShort ist dann false 
+3. PressedShort
+true gesetzt nach loslassen des Tasters wenn der Tastendruck kurz >2 Sek. war. PressedLong ist dann false 
 
 # Konfiguration
 Instanz ist unter Eltakto Geräten zu finden
