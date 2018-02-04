@@ -50,7 +50,7 @@
 			//IPS_LogMessage("FSB14 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			
 			// fahrzeit auswerten
-			$this->ProcessPress($data);
+			$this->Process($data);
 			
 		}
 		
