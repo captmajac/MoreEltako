@@ -83,7 +83,7 @@
 				}
 				else if ($Data->{'DataByte1'}==1)
 				{	// hoch mit korrektur sleppfaktor der fahrzeit
-					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-($fahrzeit*0.84));
+					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-($fahrzeit*0.835));
 				}
 				$this->CalcPosition($Data);
 			}
