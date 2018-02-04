@@ -1,7 +1,7 @@
 # FSB14
 Eltako IPS Modul für FSB14 Aktor
 
-Das Eltakto Beschattungsmoduk ist von IPS nicht vollständig unterstützt. Dieses Modul soll den Rückkanalauswerten der Fahrzeit auswerten und damit die Position in Prozent wiedergeben.
+Das Eltakto Beschattungsmodul ist von IPS nicht vollständig unterstützt. Dieses Modul soll den Rückkanalauswerten der Fahrzeit auswerten und damit die Position in Prozent wiedergeben.
 
 Die FSB14 Aktoren senden in der Endlade (Ablauf der max. Zeit am Aktor eingestellt) ein extra Protokoll für die erreichte Endlage. Dieses wird ausgewertet und in diesem Fall die Fahrzeiten und Position gemäß der Fahrzeiteneinstellung korrigiert. Damit erreicht man in einer Endlage immer eine Neujustierung folls bei mehrfachen Fahrten ohne Endlage eine Verschiebung der Position aufgrund von Ungenauigkeiten eintritt. Hintegrund: Der Aktor meldet nur die Fahrzeit und keine echte Position.
 
@@ -17,7 +17,7 @@ Instanz ist unter Eltakto Geräten mit dem Namen FSB14 zu finden
 2. Parameter setzen
 - DeviceID (Hex) - Ist die Enocean Geräteadresse in Hexadecimal ohne führende Nullen
 Fahrzeiten:
-- offen - Sollte 0 sein. Vollstäbdig offen
+- offen - Sollte 0 sein. Vollstäddig offen
 - 25% - Bsp. 50
 - 50% - Bsp. 90. Die Fahrzeit in Sek*10 eintragen, wo die Beschattung zur Hälfte beschattet hat. (90= 9 Sek.)
 - 75% - Bsp. 140
