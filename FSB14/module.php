@@ -76,7 +76,7 @@
 			{	// angehalten ohne endelage
 				// je nach richtung fahrzeit neu berechnen
 				$letztezeit=GetValue($this->GetIDForIdent("Fahrzeit"));
-				$fahrzeit=$Data->{'DataByte2'};
+				$fahrzeit=$Data->{'DataByte2'} + $Data->{'DataByte3'}*255;
 				if ($Data->{'DataByte1'}==2)
 				{	// runter
 					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit+$fahrzeit);
@@ -139,10 +139,6 @@
 				SetValue($this->GetIDForIdent("Positon"), 0);
 			}
 			
-			if ($Data->{'DataByte1'}==1)
-			{	// hoch
-				//SetValue($this->GetIDForIdent("Positon"), GetValue($this->GetIDForIdent("Positon"))*1.19);
-			}
 		}
 
 		
