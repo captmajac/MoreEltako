@@ -60,15 +60,15 @@
 			$db0 = dechex($Data->{'DataByte0'});
 			IPS_LogMessage("FSB14 Byte0",$db0."-".$Data->{'DataByte0'});
 			
-			if (strcmp($db0,"50")===0)
+			if (strcmp($db0,"70")===0)
 			{	// endmeldung oben
 				SetValue($this->GetIDForIdent("Fahrzeit"), 0);
-				SetValue($this->GetIDForIdent("Position"), 0);
+				SetValue($this->GetIDForIdent("Positon"), 0);
 			}
-			else if (strcmp($db0,"70")===0)
+			else if (strcmp($db0,"50")===0)
 			{	// endmeldung unten
 				SetValue($this->GetIDForIdent("Fahrzeit"), $this->ReadPropertyString("Pos100"));
-				SetValue($this->GetIDForIdent("Position"), 100);				
+				SetValue($this->GetIDForIdent("Positon"), 100);				
 			}
 				
 		}
