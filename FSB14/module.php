@@ -103,6 +103,8 @@
 				IPS_LogMessage("FSB14 Pos",">99");
 				$step = $this->ReadPropertyString("Pos100") - $this->ReadPropertyString("Pos99");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos99")) * (24/$step) + 99;
+				if ($step2 >100){
+					$step 2=100;}
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos75"))
