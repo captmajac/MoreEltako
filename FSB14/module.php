@@ -149,19 +149,30 @@
 			switch($Ident) {
 			case "Positon":
 				// Fahrzeit berechnen
-				// value aus Profil muss es als Positions konfiguration geben
-				$zielzeit= $this->ReadPropertyString("Pos".$Value);
-				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
-				// für EnoceanMove befehl durch 10 teilen für die Fahrzeit in sekunden 
-				$fahraenderung = ($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"))) / 10;
-				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
-				
-				// positiv dann runter fahren
-				if ($fahraenderung >0)
-					ENO_ShutterMoveDownEx ( $this->ReadPropertyString("DeviceIDActor"), $fahraenderung );
+				// sonderbehandbung wenn 0 oder 100 dann ganz hoch und runterfahren ohne fahrzeit
+				if ($Value == 0)
+				{
+					ENO_ShutterMoveUp($this->ReadPropertyString("DeviceIDActor"));
+				}
+				else if ($Value ==100)
+				{
+					ENO_ShutterMoveDown($this->ReadPropertyString("DeviceIDActor"));
+				}
 				else
-					ENO_ShutterMoveUpEx ( $this->ReadPropertyString("DeviceIDActor"), abs($fahraenderung * (1/$this->ReadPropertyString("Schleppfaktor")) ) );
-				
+				{		
+					// value aus Profil muss es als Positions konfiguration geben
+					$zielzeit= $this->ReadPropertyString("Pos".$Value);
+					// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
+					// für EnoceanMove befehl durch 10 teilen für die Fahrzeit in sekunden 
+					$fahraenderung = ($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"))) / 10;
+					IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
+
+					// positiv dann runter fahren
+					if ($fahraenderung >0)
+						ENO_ShutterMoveDownEx ( $this->ReadPropertyString("DeviceIDActor"), $fahraenderung );
+					else
+						ENO_ShutterMoveUpEx ( $this->ReadPropertyString("DeviceIDActor"), abs($fahraenderung * (1/$this->ReadPropertyString("Schleppfaktor")) ) );
+				}
 						
 				// Neuen Wert in die Statusvariable schreiben, wird über die Rückmeldung korrigiert
 				SetValue($this->GetIDForIdent($Ident), $Value);
