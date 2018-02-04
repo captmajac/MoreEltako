@@ -89,6 +89,48 @@
 				
 		}
 
+		private function CalcPosition()
+		{ 	// position anhand der fahrzeit und vorgabedaten ungefair bestimmen
+			$letztezeit=GetValue($this->GetIDForIdent("Fahrzeit"));
+			if ($letztezeit > $this->ReadPropertyString("Pos100"))
+			{	// höher als das ende. dann komplett unten
+				SetValue($this->GetIDForIdent("Positon"), 100);
+			}
+			else if ($letztezeit > $this->ReadPropertyString("Pos99"))
+			{	// höher als das 99. dann zwischen 99 und 100
+				$step = $this->ReadPropertyString("Pos100") - $this->ReadPropertyString("Pos99");
+				$step2 = ($letztezeit - $this->ReadPropertyString("Pos100")) * (24/$step) + 0;
+				SetValue($this->GetIDForIdent("Positon"), $step2);
+			}
+			else if ($letztezeit > $this->ReadPropertyString("Pos75"))
+			{	// höher als das 75. dann zwischen 75 und 99
+				$step = $this->ReadPropertyString("Pos99") - $this->ReadPropertyString("Pos75");
+				$step2 = ($letztezeit - $this->ReadPropertyString("Pos99")) * (25/$step) + 0;
+				SetValue($this->GetIDForIdent("Positon"), $step2);
+			}
+			else if ($letztezeit > $this->ReadPropertyString("Pos50"))
+			{	// höher als das 50. dann zwischen 50 und 75
+				$step = $this->ReadPropertyString("Pos75") - $this->ReadPropertyString("Pos50");
+				$step2 = ($letztezeit - $this->ReadPropertyString("Pos75")) * (25/$step) + 0;
+				SetValue($this->GetIDForIdent("Positon"), $step2);
+			}
+			else if ($letztezeit > $this->ReadPropertyString("Pos25"))
+			{	// höher als das 25. dann zwischen 25 und 50
+				$step = $this->ReadPropertyString("Pos50") - $this->ReadPropertyString("Pos25");
+				$step2 = ($letztezeit - $this->ReadPropertyString("Pos50")) * (25/$step) + 0;
+				SetValue($this->GetIDForIdent("Positon"), $step2);
+			}
+			else if ($letztezeit > $this->ReadPropertyString("Pos0"))
+			{	// höher als das 0. dann zwischen 0 und 25
+				$step = $this->ReadPropertyString("Pos25") - $this->ReadPropertyString("Pos0");
+				$step2 = ($letztezeit - $this->ReadPropertyString("Pos25")) * (25/$step) + 0;
+				SetValue($this->GetIDForIdent("Positon"), $step2);
+			}
+			else if ($letztezeit < $this->ReadPropertyString("Pos0"))
+			{	// kleiner als das 0. dann ganz oben
+				SetValue($this->GetIDForIdent("Positon"), 0);
+			}
+		}
 
 		
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
