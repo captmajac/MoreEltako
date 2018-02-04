@@ -164,7 +164,7 @@
 				
 						
 				// Neuen Wert in die Statusvariable schreiben, wird über die Rückmeldung korrigiert
-				//SetValue($this->GetIDForIdent($Ident), $Value);
+				SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
 			}
 		}
