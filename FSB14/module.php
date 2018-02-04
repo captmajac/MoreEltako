@@ -153,7 +153,7 @@
 				$zielzeit= $this->ReadPropertyString("Pos".$Value);
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
 				// für EnoceanMove befehl durch 10 teilen für die Fahrzeit in sekunden 
-				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")) / 10;
+				$fahraenderung = ($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"))) / 10;
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
 				
 				// positiv dann runter fahren
