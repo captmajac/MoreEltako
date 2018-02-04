@@ -58,7 +58,9 @@
 		{ 	// daten auswerten
 			// mögliche Endabschlatung im byte0 mit 70=oben 50=unten
 			$db0 = dechex($Data->{'DataByte0'});
-			IPS_LogMessage("FSB14 Byte0",$db0."-".$Data->{'DataByte0'});
+		
+			//IPS_LogMessage("FSB14 Byte0",$db0);
+			//IPS_LogMessage("FSB14 Byte1",$db0);
 			
 			if (strcmp($db0,"70")===0)
 			{	// endmeldung oben
@@ -69,6 +71,20 @@
 			{	// endmeldung unten
 				SetValue($this->GetIDForIdent("Fahrzeit"), $this->ReadPropertyString("Pos100"));
 				SetValue($this->GetIDForIdent("Positon"), 100);				
+			}
+			else if (strcmp($db0,"a")===0)
+			{	// angehalten ohne endelage
+				// je nach richtung fahrzeit neu berechnen
+				$letztezeit=GetValue($this->GetIDForIdent("Fahrzeit"));
+				$fahrzeit=$Data->{'DataByte2'};
+				if ($Data->{'DataByte1'}==2)
+				{	// runter
+					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit+$fahrzeit);
+				}
+				else if ($Data->{'DataByte1'}==1)
+				{	// hoch
+					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-$fahrzeit);
+				}
 			}
 				
 		}
