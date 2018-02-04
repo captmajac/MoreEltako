@@ -1,0 +1,8 @@
+{
+	"elements":
+	[
+		{ "name": "DeviceIDRet", "type": "ValidationTextBox", "caption": "DeviceID Rückmeldung (HEX):" },
+		{ "name": "Data0", "type": "ValidationTextBox", "caption": "Data0 (HEX):" }
+    		
+	]
+}
