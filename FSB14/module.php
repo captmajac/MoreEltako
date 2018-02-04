@@ -56,8 +56,10 @@
 		
 		private function Process($Data)
 		{ 	// daten auswerten
-			// mögliche Endabschlatung über zeit 70=oben 50=unten
+			// mögliche Endabschlatung im byte0 mit 70=oben 50=unten
 			$db0 = dechex($data->{'DataByte0'});
+			IPS_LogMessage("FSB14 Byte0",$db0);
+			
 			if (strcmp($db0,"50")===0)
 			{	// endmeldung oben
 				SetValue($this->GetIDForIdent("Fahrzeit"), 0);
