@@ -8,7 +8,7 @@
 		{ "name": "Pos50", "type": "ValidationTextBox", "caption": "50%" },
 		{ "name": "Pos75", "type": "ValidationTextBox", "caption": "75%" },
 		{ "name": "Pos99", "type": "ValidationTextBox", "caption": "99%" },
-		{ "name": "Pos100", "type": "ValidationTextBox", "caption": "geschlossen" }
+		{ "name": "Pos100", "type": "ValidationTextBox", "caption": "geschlossen" },
 		{ "type": "Label", "label": "Fahrzeitkorrekturwert für fahrten nach oben" },
 		{ "name": "Schleppfaktor", "type": "ValidationTextBox", "caption": "Schleppfaktor" }
     		
