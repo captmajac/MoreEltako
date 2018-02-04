@@ -12,6 +12,7 @@
 			$this->RegisterPropertyString("Pos75", "");
 			$this->RegisterPropertyString("Pos99", "");
 			$this->RegisterPropertyString("Pos100", "");
+			$this->RegisterPropertyString("Schleppfaktor", "");
 		}
     
 		public function ApplyChanges()
@@ -21,8 +22,7 @@
 			
 			$this->RegisterVariableInteger("Fahrzeit", "Fahrzeit");
 			$this->RegisterVariableInteger("Positon", "Positon");
-			//$this->RegisterVariableBoolean("PressedShort", "PressedShort");
-	
+			
 
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -83,7 +83,7 @@
 				}
 				else if ($Data->{'DataByte1'}==1)
 				{	// hoch mit korrektur sleppfaktor der fahrzeit
-					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-($fahrzeit*0.835));
+					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-($fahrzeit*$this->ReadPropertyString("Schleppfaktor")));
 				}
 				$this->CalcPosition($Data);
 			}
