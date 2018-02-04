@@ -160,7 +160,7 @@
 				if ($fahraenderung >0)
 					ENO_ShutterMoveDownEx ( $this->ReadPropertyString("DeviceIDActor"), $fahraenderung );
 				else
-					ENO_ShutterMoveUpEx ( $this->ReadPropertyString("DeviceIDActor"), abs($fahraenderung) );
+					ENO_ShutterMoveUpEx ( $this->ReadPropertyString("DeviceIDActor"), abs($fahraenderung + (1/$this->ReadPropertyString("Schleppfaktor")) ) );
 				
 						
 				// Neuen Wert in die Statusvariable schreiben, wird über die Rückmeldung korrigiert
