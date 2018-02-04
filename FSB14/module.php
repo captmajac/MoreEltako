@@ -57,7 +57,7 @@
 		private function Process($Data)
 		{ 	// daten auswerten
 			// mögliche Endabschlatung über zeit 70=oben 50=unten
-			$db0 = strcmp(dechex($data->{'DataByte0'}), "0"
+			$db0 = dechex($data->{'DataByte0'});
 			if (strcmp($db0,"50")
 			{	// endmeldung oben
 				SetValue($this->GetIDForIdent("Fahrzeit"), 0);
