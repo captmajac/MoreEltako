@@ -85,14 +85,16 @@
 				{	// hoch
 					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-$fahrzeit);
 				}
-				$this->CalcPosition();
+				$this->CalcPosition($Data);
 			}
 				
 		}
 
-		private function CalcPosition()
+		private function CalcPosition($Data)
 		{ 	// position anhand der fahrzeit und vorgabedaten ungefair bestimmen
 			$letztezeit=GetValue($this->GetIDForIdent("Fahrzeit"));
+			//$schleppfaktor=1.19;	// position um den schleppfaktor korrigieren wenn die fahrt nach oben war
+			
 			if ($letztezeit > $this->ReadPropertyString("Pos100"))
 			{	// höher als das ende. dann komplett unten
 				IPS_LogMessage("FSB14 Pos",">100");
@@ -139,6 +141,11 @@
 			{	// kleiner als das 0. dann ganz oben
 				IPS_LogMessage("FSB14 Pos","<0");
 				SetValue($this->GetIDForIdent("Positon"), 0);
+			}
+			
+			if ($Data->{'DataByte1'}==1)
+			{	// hoch
+				SetValue($this->GetIDForIdent("Positon"), GetValue($this->GetIDForIdent("Positon")*1.19);
 			}
 		}
 
