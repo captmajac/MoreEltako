@@ -152,7 +152,8 @@
 				// value aus Profil muss es als Positions konfiguration geben
 				$zielzeit= $this->ReadPropertyString("Pos".$Value);
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
-				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"));
+				// für EnoceanMove befehl durch 10 teilen für die Fahrzeit in sekunden 
+				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")) / 10;
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
 				
 				// positiv dann runter fahren
@@ -163,7 +164,7 @@
 				
 						
 				// Neuen Wert in die Statusvariable schreiben, wird über die Rückmeldung korrigiert
-				SetValue($this->GetIDForIdent($Ident), $Value);
+				//SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
 			}
 		}
