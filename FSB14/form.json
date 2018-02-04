@@ -4,7 +4,7 @@
 		{ "name": "DeviceIDRet", "type": "ValidationTextBox", "caption": "DeviceID Rückmeldung (HEX):" },
 		{ "type": "Label", "label": "Fahrzeiten" },
 		{ "name": "Pos0", "type": "ValidationTextBox", "caption": "offen" },
-		{ "name": "Pos25", "type": "ValidationTextBox", "caption": "25%" },
+		{ "name": "Pos25", "type": "NumberSpinner", "caption": "25%" },
 		{ "name": "Pos50", "type": "ValidationTextBox", "caption": "50%" },
 		{ "name": "Pos75", "type": "ValidationTextBox", "caption": "75%" },
 		{ "name": "Pos99", "type": "ValidationTextBox", "caption": "99%" },
