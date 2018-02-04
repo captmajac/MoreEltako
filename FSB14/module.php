@@ -23,6 +23,8 @@
 			$this->RegisterVariableInteger("Fahrzeit", "Fahrzeit");
 			$this->RegisterVariableInteger("Positon", "Positon", "~ShutterAssociation");
 			
+			$this->EnableAction("Positon");
+			
 
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
