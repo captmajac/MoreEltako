@@ -85,6 +85,7 @@
 				{	// hoch
 					SetValue($this->GetIDForIdent("Fahrzeit"), $letztezeit-$fahrzeit);
 				}
+				$this->CalcPosition();
 			}
 				
 		}
