@@ -152,13 +152,18 @@
 				// value aus Profil muss es als Positions konfiguration geben
 				$zielzeit= $this->ReadPropertyString("Pos".$Value);
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
-				$fahraenderung = abs($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
+				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
 				
-				IPS_LogMessage("FSB14 Link",$this->ReadPropertyString("DeviceIDActor"));
+				// positiv dann runter fahren
+				if ($fahraenderung >0)
+					ENO_ShutterMoveDownEx ( $this->ReadPropertyString("DeviceIDActor"), $fahraenderung );
+				else
+					ENO_ShutterMoveUpEx ( $this->ReadPropertyString("DeviceIDActor"), abs($fahraenderung) );
+				
 						
-				// Neuen Wert in die Statusvariable schreiben, wird ggf über die Rückmeldung korrigiert
-				// SetValue($this->GetIDForIdent($Ident), $Value);
+				// Neuen Wert in die Statusvariable schreiben, wird über die Rückmeldung korrigiert
+				SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
 			}
 		}
