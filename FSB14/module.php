@@ -24,8 +24,7 @@
 			$this->RegisterVariableInteger("Fahrzeit", "Fahrzeit");
 			$this->RegisterVariableInteger("Positon", "Positon", "~ShutterAssociation");
 			
-			$this->EnableAction("Positon");
-			
+			$this->EnableAction("Positon");	
 
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -61,9 +60,6 @@
 		{ 	// daten auswerten
 			// mögliche Endabschlatung im byte0 mit 70=oben 50=unten
 			$db0 = dechex($Data->{'DataByte0'});
-		
-			//IPS_LogMessage("FSB14 Byte0",$db0);
-			//IPS_LogMessage("FSB14 Byte1",$db0);
 			
 			if (strcmp($db0,"70")===0)
 			{	// endmeldung oben
@@ -100,45 +96,38 @@
 			
 			if ($letztezeit > $this->ReadPropertyString("Pos100"))
 			{	// höher als das ende. dann komplett unten
-				IPS_LogMessage("FSB14 Pos",">100");
 				SetValue($this->GetIDForIdent("Positon"), 100);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos99"))
 			{	// höher als das 99. dann zwischen 99 und 100
-				IPS_LogMessage("FSB14 Pos",">99");
 				SetValue($this->GetIDForIdent("Positon"), 99);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos75"))
 			{	// höher als das 75. dann zwischen 75 und 99
-				IPS_LogMessage("FSB14 Pos",">75");
 				$step = $this->ReadPropertyString("Pos99") - $this->ReadPropertyString("Pos75");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos75")) * (25/$step) + 75;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos50"))
 			{	// höher als das 50. dann zwischen 50 und 75
-				IPS_LogMessage("FSB14 Pos",">50");
 				$step = $this->ReadPropertyString("Pos75") - $this->ReadPropertyString("Pos50");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos50")) * (25/$step) + 50;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos25"))
 			{	// höher als das 25. dann zwischen 25 und 50
-				IPS_LogMessage("FSB14 Pos",">25");
 				$step = $this->ReadPropertyString("Pos50") - $this->ReadPropertyString("Pos25");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos25")) * (25/$step) + 25;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
 			else if ($letztezeit > $this->ReadPropertyString("Pos0"))
 			{	// höher als das 0. dann zwischen 0 und 25
-				IPS_LogMessage("FSB14 Pos",">0");
 				$step = $this->ReadPropertyString("Pos25") - $this->ReadPropertyString("Pos0");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos0")) * (25/$step) + 0;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
 			else if ($letztezeit < $this->ReadPropertyString("Pos0"))
 			{	// kleiner als das 0. dann ganz oben
-				IPS_LogMessage("FSB14 Pos","<0");
 				SetValue($this->GetIDForIdent("Positon"), 0);
 			}
 			
@@ -165,8 +154,6 @@
 					// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
 					// für EnoceanMove befehl durch 10 teilen für die Fahrzeit in sekunden 
 					$fahraenderung = ($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"))) / 10;
-					IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
-
 					// positiv dann runter fahren
 					if ($fahraenderung >0)
 						ENO_ShutterMoveDownEx ( $this->ReadPropertyString("DeviceIDActor"), $fahraenderung );
