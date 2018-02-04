@@ -19,8 +19,8 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Fahrzeit", "Fahrzeit");
-			$this->RegisterVariableBoolean("Positon", "Positon");
+			$this->RegisterVariableInteger("Fahrzeit", "Fahrzeit");
+			$this->RegisterVariableInteger("Positon", "Positon");
 			//$this->RegisterVariableBoolean("PressedShort", "PressedShort");
 	
 
