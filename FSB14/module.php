@@ -146,12 +146,13 @@
 		public function RequestAction($Ident, $Value)
 		{
 			switch($Ident) {
-			case "Position":
-			    //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
-			    //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
+			case "Positon":
+				//Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
+				//Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
 
-			    //Neuen Wert in die Statusvariable schreiben
-			    SetValue($this->GetIDForIdent($Ident), $Value);
+				//Neuen Wert in die Statusvariable schreiben
+				SetValue($this->GetIDForIdent($Ident), $Value);
+				break;
 			}
 		}
 		
