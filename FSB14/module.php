@@ -154,7 +154,9 @@
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
 				$fahraenderung = abs($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
-					
+				
+				IPS_LogMessage("FSB14 Link",$this->ReadPropertyString("DeviceIDActor"));
+						
 				// Neuen Wert in die Statusvariable schreiben, wird ggf über die Rückmeldung korrigiert
 				// SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
