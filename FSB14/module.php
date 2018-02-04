@@ -148,8 +148,37 @@
 			switch($Ident) {
 			case "Positon":
 				// Fahrzeit berechnen
-				IPS_LogMessage("FSB14 Neuer Wert",$Value);
-
+				$zielzeit =0;
+				switch($Ident) {
+					case "0":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos0");
+						break;
+					case "25":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos25");
+						break;
+					case "50":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos50");
+						break;
+					case "75":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos75");
+						break;
+					case "99":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos99");
+						break;
+					case "100":
+						// Fahrzeit berechnen
+						$zielzeit= $this->ReadPropertyString("Pos100");
+						break;
+				}
+				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
+				$fahraenderung = abs($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
+				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
+					
 				// Neuen Wert in die Statusvariable schreiben, wird ggf über die Rückmeldung korrigiert
 				// SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
