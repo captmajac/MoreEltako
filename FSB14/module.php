@@ -147,8 +147,8 @@
 				{
 					ENO_ShutterMoveDown($this->ReadPropertyString("DeviceIDActor"));
 				}
-				else
-				{		
+				else if($Value <> GetValue($this->GetIDForIdent($Ident))
+				{	// nur bei änderung auch fahren
 					// value aus Profil muss es als Positions konfiguration geben
 					$zielzeit= $this->ReadPropertyString("Pos".$Value);
 					// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
