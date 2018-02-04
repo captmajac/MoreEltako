@@ -7,4 +7,4 @@ Eltako IPS Modul für FTS12 Aktor auf dem RS485 Bus über einen FGW14 eingebunde
 Das Eltakto Tastermodul ist von IPS nicht unterstützt. Dieses Modul soll den Tasterstatus als Bool Statusvariablen ausgeben und eine festlegbare Unterscheidung zwischen einem kurzen und langem Tastendruck ermöglichen.
 
 # FSB14
-asd
+Das Eltakto Beschattungsmodul ist von IPS nicht vollständig unterstützt. Dieses Modul soll den Rückkanal der Fahrzeit auswerten und damit die Position in Prozent wiedergeben. Durch das Standard Variablenprofil kann ein verlinker Enocean Aktor angesteuert werden.
