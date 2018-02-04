@@ -58,12 +58,12 @@
 		{ 	// daten auswerten
 			// mögliche Endabschlatung über zeit 70=oben 50=unten
 			$db0 = dechex($data->{'DataByte0'});
-			if (strcmp($db0,"50")==true)
+			if (strcmp($db0,"50")===0)
 			{	// endmeldung oben
 				SetValue($this->GetIDForIdent("Fahrzeit"), 0);
 				SetValue($this->GetIDForIdent("Position"), 0);
 			}
-			else if (strcmp($db0,"70")==true)
+			else if (strcmp($db0,"70")===0)
 			{	// endmeldung unten
 				SetValue($this->GetIDForIdent("Fahrzeit"), $this->ReadPropertyString("Pos100"));
 				SetValue($this->GetIDForIdent("Position"), 100);				
