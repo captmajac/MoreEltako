@@ -152,7 +152,7 @@
 				// value aus Profil muss es als Positions konfiguration geben
 				$zielzeit= $this->ReadPropertyString("Pos".$Value);
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
-				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
+				$fahraenderung = $zielzeit - GetValue($this->GetIDForIdent("Fahrzeit"));
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
 				
 				// positiv dann runter fahren
