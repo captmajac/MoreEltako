@@ -21,7 +21,7 @@
 			parent::ApplyChanges();
 			
 			$this->RegisterVariableInteger("Fahrzeit", "Fahrzeit");
-			$this->RegisterVariableInteger("Positon", "Positon");
+			$this->RegisterVariableInteger("Positon", "Positon", "~ShutterAssociation");
 			
 
 			//Connect to available enocean gateway
