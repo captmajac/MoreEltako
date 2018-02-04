@@ -2,6 +2,7 @@
 	"elements":
 	[
 		{ "name": "DeviceIDRet", "type": "ValidationTextBox", "caption": "DeviceID Rückmeldung (HEX):" },
+		{ "name": "DeviceIDActor", "type": "SelectInstance", "caption": "DeviceID FSB Aktor:" },
 		{ "type": "Label", "label": "Fahrzeiten" },
 		{ "name": "Pos0", "type": "ValidationTextBox", "caption": "offen" },
 		{ "name": "Pos25", "type": "ValidationTextBox", "caption": "25%" },
