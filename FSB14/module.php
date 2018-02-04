@@ -152,9 +152,6 @@
 
 			    //Neuen Wert in die Statusvariable schreiben
 			    SetValue($this->GetIDForIdent($Ident), $Value);
-			    break;
-			default:
-			    throw new Exception("Invalid Ident");
 			}
 		}
 		
