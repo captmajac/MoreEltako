@@ -6,6 +6,7 @@
 			//Never delete this line!
 			parent::Create();
 			$this->RegisterPropertyString("DeviceIDRet", "");
+			$this->RegisterPropertyString("DeviceIDActor", "");
 			$this->RegisterPropertyString("Pos0", "");
 			$this->RegisterPropertyString("Pos25", "");
 			$this->RegisterPropertyString("Pos50", "");
@@ -148,35 +149,8 @@
 			switch($Ident) {
 			case "Positon":
 				// Fahrzeit berechnen
-				$zielzeit =0;
-				
-				switch($Value) {
-					case "0":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos0");
-						break;
-					case "25":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos25");
-						break;
-					case "50":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos50");
-						break;
-					case "75":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos75");
-						break;
-					case "99":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos99");
-						break;
-					case "100":
-						// Fahrzeit berechnen
-						$zielzeit= $this->ReadPropertyString("Pos100");
-						break;
-				}
-					$zielzeit= $this->ReadPropertyString("Pos".$Value);
+				// value aus Profil muss es als Positions konfiguration geben
+				$zielzeit= $this->ReadPropertyString("Pos".$Value);
 				// Zielzeit - aktuell gespeicherte zeit ist die fahrzeit
 				$fahraenderung = abs($zielzeit - GetValue($this->GetIDForIdent("Fahrzeit")));
 				IPS_LogMessage("FSB14 Fahränderung",$fahraenderung);
