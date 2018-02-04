@@ -145,7 +145,7 @@
 			
 			if ($Data->{'DataByte1'}==1)
 			{	// hoch
-				SetValue($this->GetIDForIdent("Positon"), GetValue($this->GetIDForIdent("Positon")*1.19);
+				SetValue($this->GetIDForIdent("Positon"), GetValue($this->GetIDForIdent("Positon"))*1.19);
 			}
 		}
 
