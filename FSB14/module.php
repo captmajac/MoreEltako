@@ -147,11 +147,11 @@
 		{
 			switch($Ident) {
 			case "Positon":
-				//Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
-				//Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
+				// Fahrzeit berechnen
+				IPS_LogMessage("FSB14 Neuer Wert",$Value);
 
-				//Neuen Wert in die Statusvariable schreiben
-				SetValue($this->GetIDForIdent($Ident), $Value);
+				// Neuen Wert in die Statusvariable schreiben, wird ggf über die Rückmeldung korrigiert
+				// SetValue($this->GetIDForIdent($Ident), $Value);
 				break;
 			}
 		}
