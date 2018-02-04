@@ -5,8 +5,13 @@
 		{
 			//Never delete this line!
 			parent::Create();
-			$this->RegisterPropertyString("DeviceID", "");
-			$this->RegisterPropertyString("Data0", "");
+			$this->RegisterPropertyString("DeviceIDRet", "");
+			$this->RegisterPropertyString("Pos0", "");
+			$this->RegisterPropertyString("Pos25", "");
+			$this->RegisterPropertyString("Pos50", "");
+			$this->RegisterPropertyString("Pos75", "");
+			$this->RegisterPropertyString("Pos99", "");
+			$this->RegisterPropertyString("Pos100", "");
 		}
     
 		public function ApplyChanges()
@@ -14,15 +19,15 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Pressed", "Pressed");
-			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
-			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
+			$this->RegisterVariableBoolean("Fahrzeit", "Fahrzeit");
+			$this->RegisterVariableBoolean("Positon", "Positon");
+			//$this->RegisterVariableBoolean("PressedShort", "PressedShort");
 	
 
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".hexdec($this->ReadPropertyString("DeviceID")).".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".hexdec($this->ReadPropertyString("DeviceIDRet")).".*");
 		}
 		
 		/*
@@ -42,57 +47,31 @@
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
-			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
+			//IPS_LogMessage("FSB14 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			
-			// prüfen ob enocean id gleich der device id in HEX und
-			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
-			if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
-			   and 
-			   strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
-			{
-				$this->ProcessPress($data);
-			}
-			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
-			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
-			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
-			else if (strcmp(dechex($data->{'DeviceID'}), $this->ReadPropertyString("DeviceID")) === 0
-			and strcmp(dechex($data->{'DataByte0'}), "0") === 0
-			and GetValue($this->GetIDForIdent("Pressed"))==true)
-			{
-				$this->ProcessRelease($data);
-			}			
+			// fahrzeit auswerten
+			$this->ProcessPress($data);
+			
 		}
 		
-		private function ProcessPress($Data)
-		{ 	// daten auswerten ->taste gedrückt
-			IPS_LogMessage("FTS12 Device","gedrückt");
-			SetValue($this->GetIDForIdent("Pressed"), true);
-			SetValue($this->GetIDForIdent("PressedLong"), false);
-			SetValue($this->GetIDForIdent("PressedShort"), false);
+		private function Process($Data)
+		{ 	// daten auswerten
+			// mögliche Endabschlatung über zeit 70=oben 50=unten
+			$db0 = strcmp(dechex($data->{'DataByte0'}), "0"
+			if (strcmp($db0,"50")
+			{	// endmeldung oben
+				SetValue($this->GetIDForIdent("Fahrzeit"), 0);
+				SetValue($this->GetIDForIdent("Position"), 0);
+			}
+			else if (strcmp($db0,"70")
+			{	// endmeldung unten
+				SetValue($this->GetIDForIdent("Fahrzeit"), $this->ReadPropertyString("Pos100"));
+				SetValue($this->GetIDForIdent("Position"), 100);				
+			}
+				
 		}
 
-		private function ProcessRelease($Data)
-		{ 	// daten auswerten ->taste losgelassen
-			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
-			IPS_LogMessage("FTS12 Device","losgelassen");
-			
-			// zeit different ausrechnen für kurzer langer tastendruck
-			$diff= microtime(true) - IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated'];
-			
-			if (GetValue($this->GetIDForIdent("Pressed"))==true)
-			{    
-				SetValue($this->GetIDForIdent("Pressed"), false);
-			}
-			// zeitpunkt loslassen auswerten und lange oder kurzen tastendruck aktualisieren
-			if ($diff >2)	
-				SetValue($this->GetIDForIdent("PressedLong"), true);
-			else
-				SetValue($this->GetIDForIdent("PressedShort"), true);
-			
-				
-	
-		}
+
 		
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 		{
