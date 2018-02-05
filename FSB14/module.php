@@ -98,29 +98,29 @@
 			{	// höher als das ende. dann komplett unten
 				SetValue($this->GetIDForIdent("Positon"), 100);
 			}
-			else if ($letztezeit > $this->ReadPropertyString("Pos99"))
+			else if ($letztezeit >= $this->ReadPropertyString("Pos99"))
 			{	// höher als das 99. dann zwischen 99 und 100
 				SetValue($this->GetIDForIdent("Positon"), 99);
 			}
-			else if ($letztezeit > $this->ReadPropertyString("Pos75"))
+			else if ($letztezeit >= $this->ReadPropertyString("Pos75"))
 			{	// höher als das 75. dann zwischen 75 und 99
 				$step = $this->ReadPropertyString("Pos99") - $this->ReadPropertyString("Pos75");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos75")) * (25/$step) + 75;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
-			else if ($letztezeit > $this->ReadPropertyString("Pos50"))
+			else if ($letztezeit >= $this->ReadPropertyString("Pos50"))
 			{	// höher als das 50. dann zwischen 50 und 75
 				$step = $this->ReadPropertyString("Pos75") - $this->ReadPropertyString("Pos50");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos50")) * (25/$step) + 50;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
-			else if ($letztezeit > $this->ReadPropertyString("Pos25"))
+			else if ($letztezeit >= $this->ReadPropertyString("Pos25"))
 			{	// höher als das 25. dann zwischen 25 und 50
 				$step = $this->ReadPropertyString("Pos50") - $this->ReadPropertyString("Pos25");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos25")) * (25/$step) + 25;
 				SetValue($this->GetIDForIdent("Positon"), $step2);
 			}
-			else if ($letztezeit > $this->ReadPropertyString("Pos0"))
+			else if ($letztezeit >= $this->ReadPropertyString("Pos0"))
 			{	// höher als das 0. dann zwischen 0 und 25
 				$step = $this->ReadPropertyString("Pos25") - $this->ReadPropertyString("Pos0");
 				$step2 = ($letztezeit - $this->ReadPropertyString("Pos0")) * (25/$step) + 0;
