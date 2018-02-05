@@ -1,5 +1,6 @@
 # IPS Modul für erweiterte Eltako Unterstützung
 Eine erweiterung von Geräteunterstützungen da die nativen Module teilweise nicht ausreichen oder es kein natives Modul gibt.
+Genauere Beschreibungen zur Nutzug befinden sich in den ReadMe Dateien der Modulordner.
 
 # FTS12
 Eltako IPS Modul für FTS12 Aktor auf dem RS485 Bus über einen FGW14 eingebunden
