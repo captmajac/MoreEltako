@@ -14,6 +14,9 @@
 			$this->RegisterPropertyString("Pos99", "");
 			$this->RegisterPropertyString("Pos100", "");
 			$this->RegisterPropertyString("Schleppfaktor", "");
+			
+			//Connect to available enocean gateway
+			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 		}
     
 		public function ApplyChanges()
@@ -25,11 +28,8 @@
 			$this->RegisterVariableInteger("Positon", "Positon", "~ShutterAssociation");
 			
 			$this->EnableAction("Positon");	
-
-			//Connect to available enocean gateway
-			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".hexdec($this->ReadPropertyString("DeviceIDRet")).".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceIDRet")).".*");
 		}
 		
 		/*
