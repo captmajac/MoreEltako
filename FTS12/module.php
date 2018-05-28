@@ -7,6 +7,9 @@
 			parent::Create();
 			$this->RegisterPropertyString("DeviceID", "");
 			$this->RegisterPropertyString("Data0", "");
+			
+			//Connect to available enocean gateway
+			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 		}
     
 		public function ApplyChanges()
@@ -17,12 +20,8 @@
 			$this->RegisterVariableBoolean("Pressed", "Pressed");
 			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
 			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
-	
-
-			//Connect to available enocean gateway
-			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".hexdec($this->ReadPropertyString("DeviceID")).".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 		
 		/*
