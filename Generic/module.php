@@ -52,7 +52,8 @@
 		
 		private function ProcessData($Data)
 		{ 	// daten auswerten ->taste gedrückt
-			//IPS_LogMessage("EEP Device","gedrückt");
+			IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
+			
 			SetValue($this->GetIDForIdent("Data0"), $data->{'DataByte0'});
 			SetValue($this->GetIDForIdent("Data1"), $data->{'DataByte1'});
 			SetValue($this->GetIDForIdent("Data2"), $data->{'DataByte2'});
