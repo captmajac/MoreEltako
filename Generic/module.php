@@ -1,5 +1,6 @@
-<?
-	class FTS12 extends IPSModule
+<?php
+
+	class GenericEEP extends IPSModule
 	{
 		public function Create() 
 		{
