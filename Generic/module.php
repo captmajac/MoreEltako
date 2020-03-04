@@ -6,7 +6,7 @@
 			//Never delete this line!
 			parent::Create();
 			$this->RegisterPropertyString("DeviceID", "");
-			$this->RegisterPropertyString("Data0", "");
+			$this->RegisterPropertyString("EEP", "");
 			
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -17,9 +17,10 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Pressed", "Pressed");
-			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
-			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
+			$this->RegisterVariableBoolean("Data0", "Data0");
+			$this->RegisterVariableBoolean("Data1", "Data1");
+			$this->RegisterVariableBoolean("Data2", "Data2");
+			$this->RegisterVariableBoolean("Data3", "Data3");
 			
 			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
@@ -43,52 +44,21 @@
 			
 			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
-			
-			// prüfen 
-			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
-			if (strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
-			{
-				$this->ProcessPress($data);
-			}
-			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
-			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
-			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
-			else if (strcmp(dechex($data->{'DataByte0'}), "0") === 0
-			and GetValue($this->GetIDForIdent("Pressed"))==true)
-			{
-				$this->ProcessRelease($data);
-			}			
+
+			$this->ProcessData($data);
+
 		}
 		
-		private function ProcessPress($Data)
+		private function ProcessData($Data)
 		{ 	// daten auswerten ->taste gedrückt
-			IPS_LogMessage("FTS12 Device","gedrückt");
-			SetValue($this->GetIDForIdent("Pressed"), true);
-			SetValue($this->GetIDForIdent("PressedLong"), false);
-			SetValue($this->GetIDForIdent("PressedShort"), false);
+			//IPS_LogMessage("EEP Device","gedrückt");
+			SetValue($this->GetIDForIdent("Data0"), $data->{'DataByte0'});
+			SetValue($this->GetIDForIdent("Data1"), $data->{'DataByte1'});
+			SetValue($this->GetIDForIdent("Data2"), $data->{'DataByte2'});
+			SetValue($this->GetIDForIdent("Data3"), $data->{'DataByte3'});
 		}
 
-		private function ProcessRelease($Data)
-		{ 	// daten auswerten ->taste losgelassen
-			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
-			IPS_LogMessage("FTS12 Device","losgelassen");
-			
-			// zeit different ausrechnen für kurzer langer tastendruck
-			$diff= microtime(true) - IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated'];
-			
-			if (GetValue($this->GetIDForIdent("Pressed"))==true)
-			{    
-				SetValue($this->GetIDForIdent("Pressed"), false);
-			}
-			// zeitpunkt loslassen auswerten und lange oder kurzen tastendruck aktualisieren
-			if ($diff >2)	
-				SetValue($this->GetIDForIdent("PressedLong"), true);
-			else
-				SetValue($this->GetIDForIdent("PressedShort"), true);
-			
-				
-	
-		}
+		
 		
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 		{
