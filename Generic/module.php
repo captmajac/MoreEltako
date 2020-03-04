@@ -59,7 +59,7 @@
 		}
 
 		
-		
+		/*
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 		{
 			if (!IPS_VariableProfileExists($Name))
@@ -77,7 +77,7 @@
 			IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
 			IPS_SetVariableProfileDigits($Name, $Digits);
 			
-		}
+		}*/
 		
 		protected function SendDebug($Message, $Data, $Format)
 		{
