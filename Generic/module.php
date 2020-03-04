@@ -50,7 +50,7 @@
 
 		}
 		
-		private function ProcessData($Data)
+		private function ProcessData($data)
 		{ 	// daten auswerten ->taste gedrückt
 			IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
 			
