@@ -1,14 +1,14 @@
 {
-	"id": "{DE1A70D0-2D07-4EA4-83EE-B4AD0866224E}",
-	"name": "FTS12",
+	"id": "{5B22E79F-2E98-A30D-A242-F1F23C7F90F0}",
+	"name": "GenericEEP",
 	"type": 3,
 	"vendor": "Eltako",
 	"aliases": 
 	[
-		"FTS12"
+		"GenericEEP"
 	],
 	"parentRequirements": ["{70E3075F-A35D-4DEB-AC20-C929A156FE48}"],
 	"childRequirements": [],
 	"implemented": ["{DE2DA2C0-7A28-4D23-A9AA-6D1C7609C7EC}"],
-	"prefix": "FTS"
+	"prefix": "EEP"
 }
