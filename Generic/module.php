@@ -18,10 +18,10 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Data0", "Data0");
-			$this->RegisterVariableBoolean("Data1", "Data1");
-			$this->RegisterVariableBoolean("Data2", "Data2");
-			$this->RegisterVariableBoolean("Data3", "Data3");
+			$this->RegisterVariableInteger("Data0", "Data0");
+			$this->RegisterVariableInteger("Data1", "Data1");
+			$this->RegisterVariableInteger("Data2", "Data2");
+			$this->RegisterVariableInteger("Data3", "Data3");
 			
 			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
