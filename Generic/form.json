@@ -2,7 +2,7 @@
 	"elements":
 	[
 		{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
-		{ "name": "Data0", "type": "ValidationTextBox", "caption": "Data0 (HEX):" }
+		{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
     		
 	]
 }
