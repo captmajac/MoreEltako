@@ -44,11 +44,15 @@
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
 			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			IPS_LogMessage("FTS12 List",$Actors[0]['ID'] );
+			
 			
 			//todo: nur wenn popup offen
 			$this->UpdateFormField("MyButton", "visible", false);
-			$Actors[0]['ID']=dechex($data->{'DeviceID'});
+			
+			$arrString = $this->ReadPropertyString("Actors");
+			$arr = json_decode($arrString);
+			IPS_LogMessage("FTS12 List",$arr  );
+			//$Actors[0]['ID']=dechex($data->{'DeviceID'});
 
 			
 			$this->ProcessData($data);
@@ -110,6 +114,7 @@
 		
 		public function GetConfigurationForm()
 		{
+			$this->RegisterPropertyString("Actors", "Actors"); 
 			
 			return '{
 				"elements":
