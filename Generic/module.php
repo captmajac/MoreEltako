@@ -23,7 +23,7 @@
 			$this->RegisterVariableInteger("Data2", "Data2");
 			$this->RegisterVariableInteger("Data3", "Data3");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 		
 		/*
@@ -43,8 +43,8 @@
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
-			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
+			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
+			IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
 
 			$this->ProcessData($data);
 
