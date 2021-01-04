@@ -9,7 +9,7 @@
 			$this->RegisterPropertyString("DeviceID", "");
 			$this->RegisterPropertyString("EEP", "");
 			
-			$this->RegisterPropertyString("Actors", "Actors"); 
+			$this->RegisterPropertyString("Actors", ""); 
 			
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -49,11 +49,12 @@
 			
 			
 			//todo: nur wenn popup offen
-			$this->UpdateFormField("MyButton", "visible", false);
 			
-			$arrString = $this->ReadPropertyString("Actors");
-			$arr = json_decode($arrString);
+			$arr = json_decode($this->ReadPropertyString("Actors"));
 			IPS_LogMessage("FTS12 List",$arr  );
+			
+			// $this->UpdateFormField("Actors", "values", "json string");
+			
 			//$Actors[0]['ID']=dechex($data->{'DeviceID'});
 
 			
