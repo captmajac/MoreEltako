@@ -103,6 +103,19 @@
 			}
 		} 
 		
+		public function GetConfigurationForm()
+		{
+			
+			return '{
+				"elements":
+				[
+					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
+					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
+
+				]
+				}';
+		
+		}
 	
 	}
 ?>
