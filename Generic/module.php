@@ -121,13 +121,9 @@
     "type": "List",
     "name": "Actors",
     "caption": "Actors",
-    "rowCount": 5,
+    "rowCount": 1,
     "add": false,
     "delete": false,
-    "sort": {
-        "column": "Name",
-        "direction": "ascending"
-    },
     "columns": [{
         "caption": "ID",
         "name": "ID", 
