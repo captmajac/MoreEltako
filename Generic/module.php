@@ -112,7 +112,7 @@
 					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" },
 					{"type": "PopupButton",
-					{"caption": "Searching Device",
+					"caption": "Searching Device",
 					"popup": {
 					    "caption": "Select Device",
 					    "items": [
