@@ -111,19 +111,20 @@
 				[
 					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" },
-					{"type": "PopupButton",
-					"caption": "Searching Device",
-					"popup": {
-					    "caption": "Select Device",
-					    "items": [
-						{
-						    "type": "SelectVariable",
-						    "name": "VariableTest",
-						    "caption": "Some Variable"
-						}
-					    ]
-						}
-					}
+					{
+        "type": "PopupButton",
+        "caption": "Open Popup",
+        "popup": {
+            "caption": "My Element Popup",
+            "items": [
+                {
+                    "type": "SelectVariable",
+                    "name": "VariableTest",
+                    "caption": "Some Variable"
+                }
+            ]
+        }
+    }
 
 				]
 				}';
