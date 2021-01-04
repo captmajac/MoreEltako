@@ -23,7 +23,7 @@
 			$this->RegisterVariableInteger("Data2", "Data2");
 			$this->RegisterVariableInteger("Data3", "Data3");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 		
 		/*
@@ -45,7 +45,12 @@
 			
 			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
 			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
+			
+			//todo: nur wenn popup offen
+			$this->UpdateFormField("MyButton", "visible", false);
+			$devices[0]=$data->{'DeviceID'};
 
+			
 			$this->ProcessData($data);
 
 		}
