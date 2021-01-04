@@ -9,6 +9,8 @@
 			$this->RegisterPropertyString("DeviceID", "");
 			$this->RegisterPropertyString("EEP", "");
 			
+			$this->RegisterPropertyString("Actors", "Actors"); 
+			
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 		}
@@ -114,7 +116,6 @@
 		
 		public function GetConfigurationForm()
 		{
-			$this->RegisterPropertyString("Actors", "Actors"); 
 			
 			return '{
 				"elements":
