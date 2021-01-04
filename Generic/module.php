@@ -49,7 +49,7 @@
 			
 			
 			//todo: nur wenn popup offen
-			ReloadForm ();
+			$this->ReloadForm();
 			$arr = json_decode($this->ReadPropertyString("Actors"));
 			IPS_LogMessage("FTS12 List",$arr  );
 			
