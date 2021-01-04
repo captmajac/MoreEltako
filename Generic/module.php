@@ -44,11 +44,11 @@
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
 			IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			IPS_LogMessage("FTS12 List",$devices[0]['ID'] );
+			IPS_LogMessage("FTS12 List",$Actors[0]['ID'] );
 			
 			//todo: nur wenn popup offen
 			$this->UpdateFormField("MyButton", "visible", false);
-			$devices[0]['ID']=dechex($data->{'DeviceID'});
+			$Actors[0]['ID']=dechex($data->{'DeviceID'});
 
 			
 			$this->ProcessData($data);
