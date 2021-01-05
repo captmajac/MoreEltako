@@ -50,8 +50,8 @@
 			
 			//todo: nur wenn popup offen
 			//$this->ReloadForm();
-			$arr = json_decode($this->ReadPropertyString("Actors"));
-			IPS_LogMessage("FTS12 List",$arr  );
+			//$arr = json_decode($this->ReadPropertyString("Actors"));
+			//IPS_LogMessage("FTS12 List",$arr  );
 			
 			// $this->UpdateFormField("Actors", "values", "json string");
 			
@@ -64,7 +64,7 @@
 		
 		private function ProcessData($data)
 		{ 	// daten auswerten ->taste gedrückt
-			IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
+			//IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
 			
 			SetValue($this->GetIDForIdent("Data0"), $data->{'DataByte0'});
 			SetValue($this->GetIDForIdent("Data1"), $data->{'DataByte1'});
@@ -123,39 +123,40 @@
 				[
 					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" },
-					{
-					"type": "PopupButton",
+				]
+				"actions";
+				[
+					{ "type": "PopupButton",
 					"caption": "Search Device",
 					"popup": {
 					    "caption": "Choose Device",
 					    "items": [
-{
-    "type": "List",
-    "name": "Actors",
-    "caption": "Actors",
-    "rowCount": 1,
-    "add": false,
-    "delete": false,
-    "columns": [{
-        "caption": "ID",
-        "name": "ID", 
-        "width": "100px",
-        "add": ""
-    }, {
-        "caption": "Reference",
-        "name": "Reference",
-        "width": "auto",
-        "add": ""
-    }],
-    "values": [{
-        "ID": 12435,
-        "Reference": "todo"
-    }]
-}
+							{
+							    "type": "List",
+							    "name": "Actors",
+							    "caption": "Actors",
+							    "rowCount": 1,
+							    "add": false,
+							    "delete": false,
+							    "columns": [{
+								"caption": "ID",
+								"name": "ID", 
+								"width": "100px",
+								"add": ""
+							    }, {
+								"caption": "Reference",
+								"name": "Reference",
+								"width": "auto",
+								"add": ""
+							    }],
+							    "values": [{
+								"ID": 12435,
+								"Reference": "todo"
+							    }]
+							}
 					    ]
 					}
 				    }
-
 				]
 				}';
 		
