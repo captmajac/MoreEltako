@@ -122,11 +122,11 @@
 				"elements":
 				[
 					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
-					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" },
+					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
 				]
 				"actions";
 				[
-					{ "type": "PopupButton",
+					{ "name": "DeviceSearch", "type": "PopupButton",
 					"caption": "Search Device",
 					"popup": {
 					    "caption": "Choose Device",
@@ -157,6 +157,7 @@
 					    ]
 					}
 				    }
+					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors["ID"]);" }
 				]
 				}';
 		
