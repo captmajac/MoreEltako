@@ -131,7 +131,8 @@ class GenericEEP extends IPSModule {
 								"Reference": "todo"
 							    }]
 								},
-								{ "type": "Button", "caption": "Apply selcted", "onClick": "print_r($Actors["ID"]);" }
+								{ "type": "Button", "caption": "Apply selcted", "onClick": "print_r($devices['ID']);"
+								}
 						    ]
 						}
 				    }
