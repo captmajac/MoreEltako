@@ -43,7 +43,7 @@ class GenericEEP extends IPSModule {
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
 		$this->tmp_devices[] = dechex ( $data->{'DeviceID'} );
-		IPS_LogMessage ( "FTS12 Device ID (HEX)", $this->tmp_devices );
+		IPS_LogMessage ( "FTS12 Device ID (HEX)", sizeof( $this->tmp_devices) );
 
 		// todo: nur wenn popup offen
 		// $this->ReloadForm();
