@@ -100,6 +100,40 @@ class GenericEEP extends IPSModule {
 									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 									{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
 				
+				    ],
+				    "actions":
+				    [
+					{ "type": "PopupButton",
+					"caption": "Search Device",
+					"popup": {
+					    "caption": "Choose Device",
+					    "items": [
+							{
+							    "type": "List",
+							    "name": "Actors",
+							    "caption": "Actors",
+							    "rowCount": 1,
+							    "add": false,
+							    "delete": false,
+							    "columns": [{
+								"caption": "ID",
+								"name": "ID", 
+								"width": "100px",
+								"add": ""
+							    }, {
+								"caption": "Reference",
+								"name": "Reference",
+								"width": "auto",
+								"add": ""
+							    }],
+							    "values": [{
+								"ID": 12435,
+								"Reference": "todo"
+							    }]
+								}
+						    ]
+						}
+				    }
 				    ]
 			}';
 	}
