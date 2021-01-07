@@ -1,7 +1,7 @@
 <?php
 class GenericEEP extends IPSModule {
 	
-	private  $tmp_devices = array();
+	private  $tmp_devices = array("Orange", "Banane");
 	
 	public function Create() {
 		// Never delete this line!
