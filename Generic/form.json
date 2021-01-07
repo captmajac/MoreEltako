@@ -9,7 +9,7 @@
 				    [
 					{ "type": "PopupButton",
 					"caption": "Search Device",
-					"onClick":  "GenericEEP_SearchState(true);",
+					"onClick":  "SearchState(true);",
 					
 					
 					"popup": {

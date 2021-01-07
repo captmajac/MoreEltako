@@ -43,7 +43,7 @@ class GenericEEP extends IPSModule {
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
 		$state = $this->GetBuffer("Serach") ;
-		if (state=="true")
+		if ($state=="true")
 		{
 			$tmp = $this->GetBuffer("Test");
 			$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
