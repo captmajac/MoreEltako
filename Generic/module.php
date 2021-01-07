@@ -124,7 +124,7 @@
 					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
 				],
-				"actions";
+				"actions":
 				[
 					{ "type": "PopupButton",
 					"caption": "Search Device",
