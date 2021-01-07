@@ -3,7 +3,8 @@ class GenericEEP extends IPSModule {
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
-		$this->RegisterPropertyString ( "DeviceID", "" );
+		//$this->RegisterPropertyString ( "DeviceID", "" );
+		$this->RegisterAttributeString ( "DeviceID", "" );
 		$this->RegisterPropertyString ( "EEP", "" );
 
 		$this->RegisterPropertyString ( "Actors", "" );
@@ -20,7 +21,7 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 
-		// $this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+		// $this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadAttributeString("DeviceID")).".*");
 	}
 
 	/*
@@ -135,7 +136,7 @@ class GenericEEP extends IPSModule {
 							    }
 								]
 								},
-								{ "type": "Button", "caption": "Apply selcted", "onClick": "print_r($Actors[\"ID\"]);"
+								{ "type": "Button", "caption": "Apply selcted", "onClick":  "$this->WriteAttributeString(\"DeviceID\", $Actors[\"ID\"]);"
 								}
 						    ]
 						}
