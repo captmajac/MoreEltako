@@ -94,55 +94,11 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	public function GetConfigurationForm() {
-		return '
-				{
-				"elements":
-				    [
-									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
-									{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
-				
-				    ],
-				    "actions":
-				    [
-					{ "type": "PopupButton",
-					"caption": "Search Device",
-					"popup": {
-					    "caption": "Choose Device",
-					    "items": [
-							{
-							    "type": "List",
-							    "name": "Actors",
-							    "caption": "Actors",
-							    "rowCount": 1,
-							    "add": false,
-							    "delete": false,
-							    "columns": [{
-								"caption": "ID",
-								"name": "ID", 
-								"width": "100px",
-								"add": ""
-							    }, {
-								"caption": "Reference",
-								"name": "Reference",
-								"width": "auto",
-								"add": ""
-							    }],
-							    "values": [{
-								"ID": 12435,
-								"Reference": "todo"
-							    },{
-								"ID": 7890,
-								"Reference": "todo"
-							    }
-								]
-								},
-								{ "type": "Button", "caption": "Apply selcted", "onClick":  "$this->WriteAttributeString(\"DeviceID\", $Actors[\"ID\"]);"
-								}
-						    ]
-						}
-				    }
-				    ]
-			}';
+		
+		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+		return json_encode($Form);
+		
+
 	}
 }
 ?>
