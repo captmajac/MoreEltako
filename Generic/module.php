@@ -94,22 +94,14 @@ class GenericEEP extends IPSModule {
 	}
 	public function GetConfigurationForm() {
 		return '
-{
-"elements":
-    [
-					{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
-					{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
-
-    ],
-    "actions":
-    [
-					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors["ID"]);" }
-    ],
-    "status":
-    [
-    ]
-
-				}';
+				{
+				"elements":
+				    [
+									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
+									{ "name": "EEP", "type": "ValidationTextBox", "caption": "EEP (XX-XX-XX):" }
+				
+				    ]
+			}';
 	}
 }
 ?>
