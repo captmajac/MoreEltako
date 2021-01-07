@@ -129,7 +129,11 @@ class GenericEEP extends IPSModule {
 							    "values": [{
 								"ID": 12435,
 								"Reference": "todo"
-							    }]
+							    },{
+								"ID": 7890,
+								"Reference": "todo"
+							    }
+								]
 								},
 								{ "type": "Button", "caption": "Apply selcted", "onClick": "print_r($Actors[\"ID\"]);"
 								}
