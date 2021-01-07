@@ -9,6 +9,9 @@
 				    [
 					{ "type": "PopupButton",
 					"caption": "Search Device",
+					"onClick":  "GenericEEP_SearchState(true);",
+					
+					
 					"popup": {
 					    "caption": "Choose Device",
 					    "items": [

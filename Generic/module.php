@@ -42,23 +42,22 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		$tmp = $this->GetBuffer("Test");
-		$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
-		IPS_LogMessage ( "FTS12 Device ID (HEX)", $tmp );
-		
-		$this->SetBuffer("Test",$tmp);
-
-		// todo: nur wenn popup offen
-		// $this->ReloadForm();
-		// $arr = json_decode($this->ReadPropertyString("Actors"));
-		// IPS_LogMessage("FTS12 List",$arr );
-
-		// $this->UpdateFormField("Actors", "values", "json string");
-
-		// $Actors[0]['ID']=dechex($data->{'DeviceID'});
-
-		$this->ProcessData ( $data );
+		$state = $this->GetBuffer("Serach") ;
+		if (state=="true")
+		{
+			$tmp = $this->GetBuffer("Test");
+			$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
+			IPS_LogMessage ( "FTS12 Device ID (HEX)", $tmp );
+			$this->SetBuffer("Test",$tmp);
+			
+			// $this->UpdateFormField("Actors", "values", "json string");
+			//$this->ReloadForm();
+		}
+		else {
+			$this->ProcessData ( $data );
+		}
 	}
+	
 	private function ProcessData($data) { // daten auswerten ->taste gedrückt
 	                                      // IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
 		SetValue ( $this->GetIDForIdent ( "Data0" ), $data->{'DataByte0'} );
@@ -107,5 +106,20 @@ class GenericEEP extends IPSModule {
 		
 
 	}
+	
+	public function SearchState($state) {
+		
+		if ($state==true)
+		{
+			$this->SetBuffer("Serach", "true");
+		}
+		else
+		{
+			$this->SetBuffer("Serach", "false");
+		}
+		
+		
+	}
+		
 }
 ?>
