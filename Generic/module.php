@@ -126,37 +126,6 @@
 				],
 				"actions":
 				[
-					{ "type": "PopupButton",
-					"caption": "Search Device",
-					"popup": {
-					    "caption": "Choose Device",
-					    "items": [
-							{
-							    "type": "List",
-							    "name": "Actors",
-							    "caption": "Actors",
-							    "rowCount": 1,
-							    "add": false,
-							    "delete": false,
-							    "columns": [{
-								"caption": "ID",
-								"name": "ID", 
-								"width": "100px",
-								"add": ""
-							    }, {
-								"caption": "Reference",
-								"name": "Reference",
-								"width": "auto",
-								"add": ""
-							    }],
-							    "values": [{
-								"ID": 12435,
-								"Reference": "todo"
-							    }]
-							}
-					    ]
-					}
-				    }
 					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors["ID"]);" }
 				]
 				}';
