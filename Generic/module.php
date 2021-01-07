@@ -130,11 +130,11 @@ class GenericEEP extends IPSModule {
 								"ID": 12435,
 								"Reference": "todo"
 							    }]
-								}
+								},
+{ "type": "Button", "caption": "An", "onClick": "echo $id;" }
 						    ]
 						}
-				    },
-					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors["name"]);" }
+				    }
 				    ]
 			}';
 	}
