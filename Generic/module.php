@@ -133,8 +133,8 @@ class GenericEEP extends IPSModule {
 								}
 						    ]
 						}
-				    }
-					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors["name"]);" }
+				    },
+					{ "type": "Button", "caption": "Ausgabe", "onClick": "print_r($Actors['name']);" }
 				    ]
 			}';
 	}
