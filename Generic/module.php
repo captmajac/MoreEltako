@@ -4,7 +4,7 @@ class GenericEEP extends IPSModule {
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
-		$this->RegisterPropertyString ( "DeviceID", "" );
+		//$this->RegisterPropertyString ( "DeviceID", "" );
 		//$this->RegisterAttributeString ( "DeviceID", "" );
 		//$this->RegisterPropertyString ( "EEP", "" );
 
@@ -121,7 +121,10 @@ class GenericEEP extends IPSModule {
 		
 		$this->SetBuffer("Serach", "false");
 		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
-		$this->WriteAttributeString("DeviceID", $DevID);
+		
+		IPS_SetProperty (this, "DeviceID", $DevID)
+		
+	
 		
 	}
 }
