@@ -4,11 +4,10 @@ class GenericEEP extends IPSModule {
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
-		//$this->RegisterPropertyString ( "DeviceID", "" );
-		$this->RegisterAttributeString ( "DeviceID", "" );
+		$this->RegisterPropertyString ( "DeviceID", "" );
+		//$this->RegisterAttributeString ( "DeviceID", "" );
 		//$this->RegisterPropertyString ( "EEP", "" );
 
-		$this->RegisterPropertyString ( "Actors", "" );
 
 		// Connect to available enocean gateway
 		$this->ConnectParent ( "{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}" );
@@ -97,12 +96,11 @@ class GenericEEP extends IPSModule {
 			parent::SendDebug ( $Message, $Data, $Format );
 		}
 	}
+	
 	public function GetConfigurationForm() {
 		
 		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 		return json_encode($Form);
-		
-
 	}
 	
 	public function SearchModules(string $state) {
@@ -115,6 +113,7 @@ class GenericEEP extends IPSModule {
 		else
 		{
 			$this->SetBuffer("Serach", "false");
+			$this->SetBuffer("Test","");
 		}
 	}
 		
