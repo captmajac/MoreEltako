@@ -107,7 +107,7 @@ class GenericEEP extends IPSModule {
 
 	}
 	
-	public function SearchState($state) {
+	private function SearchState($state) {
 		
 		if ($state==true)
 		{
