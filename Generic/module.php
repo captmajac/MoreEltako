@@ -1,7 +1,7 @@
 <?php
 class GenericEEP extends IPSModule {
 	
-	private  $tmp_devices = array("Orange", "Banane");
+	var $tmp_search;
 	
 	public function Create() {
 		// Never delete this line!
@@ -111,7 +111,9 @@ class GenericEEP extends IPSModule {
 		
 		if ($state=="true")
 		{
+			$this->$tmp_search= true;
 			$this->SetBuffer("Serach", "true");
+			$this->SetBuffer("Test","");
 		}
 		else
 		{
