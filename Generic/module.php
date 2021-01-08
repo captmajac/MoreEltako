@@ -19,7 +19,11 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 
-		// $this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadAttributeString("DeviceID")).".*");
+		if ($this->GetBuffer("Serach") <> "true")
+		{
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadAttributeString("DeviceID")).".*");
+		}
+
 	}
 
 	/*
@@ -37,13 +41,22 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		$state = $this->GetBuffer("Serach") ;
-		if ($state=="true")
+		
+		if ($this->GetBuffer("Serach")=="true")
 		{
 			$tmp = $this->GetBuffer("Test");
-			$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
-			IPS_LogMessage ( "FTS12 Device ID (HEX)", $tmp );
+			
+			// führende nullen für Hex
+			$tmp = $tmp.str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) ;
+
+			//IPS_LogMessage ( "FTS12 Device ID (HEX)", $tmp );
 			$this->SetBuffer("Test",$tmp);
+			
+			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+			
+			IPS_LogMessage ( "FTS12 Device ID (HEX)", $Form['actions']['popup'] );
+			
+			
 			
 			// $this->UpdateFormField("Actors", "values", "json string");
 			//$this->ReloadForm();

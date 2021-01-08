@@ -1,7 +1,7 @@
 {
 				"elements":
 				    [
-									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):", "validate":"[0-9A-F]{8}"}
+									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (8 digit HEX):", "validate":"[0-9A-F]{8}"}
 				
 				    ],
 				    "actions":
