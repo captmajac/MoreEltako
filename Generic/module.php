@@ -107,9 +107,9 @@ class GenericEEP extends IPSModule {
 
 	}
 	
-	public function SearchModules() {
-		$state=false;
-		if ($state==true)
+	public function SearchModules(string $state) {
+		
+		if ($state=="true")
 		{
 			$this->SetBuffer("Serach", "true");
 		}
