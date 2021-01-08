@@ -122,8 +122,8 @@ class GenericEEP extends IPSModule {
 		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
 		
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
+		IPS_ApplyChanges($this->InstanceID);
 		
-	
 		
 	}
 }
