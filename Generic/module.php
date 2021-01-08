@@ -4,8 +4,7 @@ class GenericEEP extends IPSModule {
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
-		//$this->RegisterPropertyString ( "DeviceID", "" );
-		//$this->RegisterAttributeString ( "DeviceID", "" );
+		$this->RegisterPropertyString ( "DeviceID", "" );
 		//$this->RegisterPropertyString ( "EEP", "" );
 
 
