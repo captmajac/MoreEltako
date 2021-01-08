@@ -42,7 +42,7 @@
 							    }
 								]
 								},
-								{ "type": "Button", "caption": "Apply selcted", "onClick":  "echo( $Actors[\"ID\"]);"
+								{ "type": "Button", "caption": "Apply selcted", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
 								}
 						    ]
 						}

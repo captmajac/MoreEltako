@@ -117,9 +117,13 @@ class GenericEEP extends IPSModule {
 		{
 			$this->SetBuffer("Serach", "false");
 		}
-		
-		
 	}
 		
+	public function SetSelectedModul(string $DevID) {
+		
+		$this->SetBuffer("Serach", "false");
+		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
+		
+	}
 }
 ?>
