@@ -1,14 +1,12 @@
 <?php
 class GenericEEP extends IPSModule {
 	
-	public $tmp_search;
-	
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
 		//$this->RegisterPropertyString ( "DeviceID", "" );
 		$this->RegisterAttributeString ( "DeviceID", "" );
-		$this->RegisterPropertyString ( "EEP", "" );
+		//$this->RegisterPropertyString ( "EEP", "" );
 
 		$this->RegisterPropertyString ( "Actors", "" );
 
@@ -42,8 +40,8 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		//$state = $this->GetBuffer("Serach") ;
-		if ($this->tmp_search ==true)
+		$state = $this->GetBuffer("Serach") ;
+		if ($state=="true")
 		{
 			$tmp = $this->GetBuffer("Test");
 			$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
@@ -59,7 +57,7 @@ class GenericEEP extends IPSModule {
 	}
 	
 	private function ProcessData($data) { // daten auswerten ->taste gedrückt
-	                                      // IPS_LogMessage("EEP Device", $data->{'DataByte0'} );
+	                                      
 		SetValue ( $this->GetIDForIdent ( "Data0" ), $data->{'DataByte0'} );
 		SetValue ( $this->GetIDForIdent ( "Data1" ), $data->{'DataByte1'} );
 		SetValue ( $this->GetIDForIdent ( "Data2" ), $data->{'DataByte2'} );
@@ -111,22 +109,20 @@ class GenericEEP extends IPSModule {
 		
 		if ($state=="true")
 		{
-			$this->tmp_search= true;
-			//$this->SetBuffer("Serach", "true");
+			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
 		}
 		else
 		{
-			$this->tmp_search= false;
-			//$this->SetBuffer("Serach", "false");
+			$this->SetBuffer("Serach", "false");
 		}
 	}
 		
 	public function SetSelectedModul(string $DevID) {
 		
-		//$this->SetBuffer("Serach", "false");
-		$this->tmp_search= false;
+		$this->SetBuffer("Serach", "false");
 		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
+		$this->WriteAttributeString("DeviceID", $DevID);
 		
 	}
 }
