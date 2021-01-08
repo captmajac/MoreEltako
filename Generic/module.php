@@ -5,7 +5,6 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
-		//$this->RegisterPropertyString ( "EEP", "" );
 
 
 		// Connect to available enocean gateway
