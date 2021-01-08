@@ -1,7 +1,7 @@
 <?php
 class GenericEEP extends IPSModule {
 	
-	var $tmp_search;
+	public $tmp_search;
 	
 	public function Create() {
 		// Never delete this line!
@@ -42,8 +42,8 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		$state = $this->GetBuffer("Serach") ;
-		if ($state=="true")
+		//$state = $this->GetBuffer("Serach") ;
+		if ($this->tmp_search =="true")
 		{
 			$tmp = $this->GetBuffer("Test");
 			$tmp = $tmp.",".dechex ( $data->{'DeviceID'} );
@@ -111,19 +111,21 @@ class GenericEEP extends IPSModule {
 		
 		if ($state=="true")
 		{
-			$this->$tmp_search= true;
-			$this->SetBuffer("Serach", "true");
+			$this->tmp_search= true;
+			//$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
 		}
 		else
 		{
-			$this->SetBuffer("Serach", "false");
+			$this->tmp_search= true;
+			//$this->SetBuffer("Serach", "false");
 		}
 	}
 		
 	public function SetSelectedModul(string $DevID) {
 		
-		$this->SetBuffer("Serach", "false");
+		//$this->SetBuffer("Serach", "false");
+		$this->tmp_search= true;
 		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
 		
 	}
