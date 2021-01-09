@@ -43,6 +43,7 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
+		IPS_LogMessage ("xxx",$this->GetBuffer("Serach"));
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
