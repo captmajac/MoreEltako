@@ -121,7 +121,7 @@ class GenericEEP extends IPSModule {
 	public function SetSelectedModul(string $DevID) {
 		
 		$this->SetBuffer("Serach", "false");
-		SetBuffer("List","");
+		$this->SetBuffer("List","");
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
 		IPS_ApplyChanges($this->InstanceID);
 		
@@ -140,12 +140,17 @@ class GenericEEP extends IPSModule {
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
 		$newValue->Reference = $Reference; 
-		$values[] = $newValue;
-		$jsValues = json_encode($values);
-		$this->SetBuffer("List",$jsValues);
 		
-	
-		$this->UpdateFormField("Actors", "values", $jsValues );
+		if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
+		{
+			$values[] = $newValue;
+			
+			$jsValues = json_encode($values);
+			$this->SetBuffer("List",$jsValues);
+			
+			$this->UpdateFormField("Actors", "values", $jsValues );
+		}
+
 	}
 	
 }
