@@ -117,7 +117,7 @@ class GenericEEP extends IPSModule {
 		$newValue->ID = $DevID;
 		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
 		
-		if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
+		if ($values != null && in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
 		{
 			$values[] = $newValue;
 			
