@@ -110,7 +110,7 @@ class GenericEEP extends IPSModule {
 		
 		
 		// Device Liste als Buffer 
-		$values = json_decode($this->GetBuffer("List"),true);//json_decode( $this );
+		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
