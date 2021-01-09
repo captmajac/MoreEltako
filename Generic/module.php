@@ -152,7 +152,7 @@ class GenericEEP extends IPSModule {
 		$values[] = $newValue;
 		
 	
-		$this->UpdateFormField("Actors", "values", $values );
+		$this->UpdateFormField("Actors", "values", json_encode($values) );
 		//$this->ReloadForm();
 	}
 	
