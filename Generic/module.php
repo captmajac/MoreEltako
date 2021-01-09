@@ -41,7 +41,6 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		IPS_LogMessage ("xxx",$this->GetBuffer("Serach"));
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
@@ -117,7 +116,16 @@ class GenericEEP extends IPSModule {
 		$newValue->ID = $DevID;
 		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
 		
-		if ($values != null && in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
+		if ($values != null)
+		{
+			print_r ("null");
+		}
+		else
+		{
+			print_r ("voll");
+		}
+		
+		if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
 		{
 			$values[] = $newValue;
 			
