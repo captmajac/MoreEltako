@@ -33,17 +33,17 @@
 								"add": ""
 							    }],
 							    "values": [{
-								"ID": 12435,
+								"ID": "00000000",
 								"Reference": "todo"
 							    },{
-								"ID": 7890,
+								"ID": "AA000000",
 								"Reference": "todo"
 							    }
 								]
 								},
 								{ "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
 								},
-								{ "type": "Button", "caption": "test", "onClick":  "GenericEEP_test($id, $Actors[\"ID\"]);"
+								{ "type": "Button", "caption": "test", "onClick":  "GenericEEP_test($id);"
 								}
 						    ]
 						}
