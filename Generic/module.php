@@ -49,7 +49,7 @@ class GenericEEP extends IPSModule {
 			
 			IPS_LogMessage ( "FTS12 Device ID (HEX)", $ValidDevID );
 			
-			updateList($ValidDevID, "todo");
+			$this->updateList($ValidDevID, "todo");
 		}
 		else {
 			$this->ProcessData ( $data );
