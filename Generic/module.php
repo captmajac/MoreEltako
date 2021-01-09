@@ -141,13 +141,14 @@ class GenericEEP extends IPSModule {
 	
 	public function test() {
 		
-		$array = [
-				"ID"		=> "00000000"
-		];
+		$array = "\"values\": [{
+			\"ID\": \"B0000000\",
+			\"Reference\": \"todo\"
+		}";
 		
 	
-		$this->UpdateFormField("Actors", "values",$array );
-		$this->ReloadForm();
+		$this->UpdateFormField("Actors", "values", $array );
+		//$this->ReloadForm();
 	}
 	
 }
