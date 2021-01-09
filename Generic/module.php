@@ -112,14 +112,12 @@ class GenericEEP extends IPSModule {
 		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"),true);//json_decode( $this );
 		
-		print_r($values);
-		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
 		$newValue->Reference = $Reference; 
 		
 		// Nur zur Liste/Update wenn noch nicht enthalten
-		if (count($values) != 0 )
+		if (GetBuffer("List") != "" )
 		{
 			if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
 			{
