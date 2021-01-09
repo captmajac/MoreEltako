@@ -98,11 +98,7 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-	public function SetSelectedModul() {
-		$this->SetBuffer("Serach", "");
-		$this->SetBuffer("List","");
-	}
-	
+
 	public function SetSelectedModul(string $DevID) {
 		
 		$this->SetBuffer("Serach", "");
