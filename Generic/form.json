@@ -17,7 +17,7 @@
 							{
 							    "type": "List",
 							    "name": "Actors",
-							    "caption": "Actors",
+							    "caption": "Found Actors",
 							    "rowCount": 10,
 							    "add": false,
 							    "delete": false,
