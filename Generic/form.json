@@ -1,7 +1,7 @@
 {
 				"elements":
 				    [
-									{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (8 digit HEX):", "validate":"[0-9A-F]{8}"}
+						{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (8 digit HEX):", "validate":"[0-9A-F]{8}"}
 				
 				    ],
 				    "actions":
@@ -35,7 +35,7 @@
 							    "values": [
 								]
 								},
-								{ "type": "Button", "caption": "Apply selected", "onClick":  "if (sizeof($Actors)!=0){GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);};"
+								{ "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
 								}
 						    ]
 						}

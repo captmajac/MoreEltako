@@ -19,12 +19,10 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 
-		IPS_LogMessage("Buffer",$this->GetBuffer("Serach"));
+		//IPS_LogMessage("Buffer",$this->GetBuffer("Serach"));
 		
-		//if ($this->GetBuffer("Serach") != "true")
-		{
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
-		}
+		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+		
 
 	}
 
@@ -49,7 +47,7 @@ class GenericEEP extends IPSModule {
 		{
 			// führende Nullen und in 8 Zeichen Grossbuchstaben formatieren
 			$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
-			$this->updateList($ValidDevID, "todo");
+			$this->updateList($ValidDevID);
 		}
 		else {
 			$this->ProcessData ( $data );
@@ -102,13 +100,13 @@ class GenericEEP extends IPSModule {
 		
 	public function SetSelectedModul(string $DevID) {
 		
-		$this->SetBuffer("Serach", "false");
+		$this->SetBuffer("Serach", "");
 		$this->SetBuffer("List","");
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
 		IPS_ApplyChanges($this->InstanceID);
 	}
 	
-	public function updateList(string $DevID, string $Reference) {
+	public function updateList(string $DevID) {
 		
 		
 		// Device Liste als Buffer 
@@ -116,22 +114,18 @@ class GenericEEP extends IPSModule {
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
-		$newValue->Reference = $Reference; 
+		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
 		
-		// Nur zur Liste/Update wenn noch nicht enthalten
-		//if ($values != "" )
+		if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
 		{
-			if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
-			{
-				$values[] = $newValue;
-				
-				$jsValues = json_encode($values);
-				$this->SetBuffer("List",$jsValues);
-				
-				$this->UpdateFormField("Actors", "values", $jsValues );
-			}
+			$values[] = $newValue;
+			
+			$jsValues = json_encode($values);
+			$this->SetBuffer("List",$jsValues);
+			
+			$this->UpdateFormField("Actors", "values", $jsValues );
 		}
-
+		
 	}
 	
 }
