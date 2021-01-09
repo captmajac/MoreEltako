@@ -45,7 +45,7 @@ class GenericEEP extends IPSModule {
 		if ($this->GetBuffer("Serach")=="true")
 		{
 			// führende nullen für Hex
-			$ValidDevID = str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) ;
+			$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
 			
 			IPS_LogMessage ( "FTS12 Device ID (HEX)", $ValidDevID );
 			
@@ -129,9 +129,11 @@ class GenericEEP extends IPSModule {
 	
 	public function updateList(string $DevID, string $Reference) {
 		
-		$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
+		//$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
-		$values = $data->actions[0]->popup->items[0]->values;
+		$values = json_decode( $this->actions[0]->popup->items[0]->values );
+		
+		//$values = $data->actions[0]->popup->items[0]->values;
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
