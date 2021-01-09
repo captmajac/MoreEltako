@@ -139,7 +139,7 @@ class GenericEEP extends IPSModule {
 		
 	}
 	
-	public function test(string $state) {
+	public function test(string $DevID) {
 		
 		$this->UpdateFormField("Actors", "values", "asdadads");
 		$this->ReloadForm();
