@@ -35,9 +35,6 @@
 							    "values": [{
 								"ID": "00000000",
 								"Reference": "todo"
-							    },{
-								"ID": "AA000000",
-								"Reference": "todo"
 							    }
 								]
 								},

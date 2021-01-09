@@ -21,7 +21,7 @@ class GenericEEP extends IPSModule {
 
 		if ($this->GetBuffer("Serach") != "true")
 		{
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 
 	}
@@ -44,10 +44,11 @@ class GenericEEP extends IPSModule {
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
-			
-			
 			// führende nullen für Hex
 			$ValidDevID = str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) ;
+			
+			IPS_LogMessage ( "FTS12 Device ID (HEX)", $ValidDevID );
+			
 			updateList($ValidDevID, "todo");
 		}
 		else {
@@ -120,8 +121,6 @@ class GenericEEP extends IPSModule {
 	public function SetSelectedModul(string $DevID) {
 		
 		$this->SetBuffer("Serach", "false");
-		IPS_LogMessage ( "FTS12 Device ID (HEX)", $DevID );
-		
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
 		IPS_ApplyChanges($this->InstanceID);
 		
