@@ -117,7 +117,7 @@ class GenericEEP extends IPSModule {
 		$newValue->Reference = $Reference; 
 		
 		// Nur zur Liste/Update wenn noch nicht enthalten
-		if (GetBuffer("List") != "" )
+		if ($this->GetBuffer("List") != "" )
 		{
 			if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
 			{
