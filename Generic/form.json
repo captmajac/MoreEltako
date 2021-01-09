@@ -32,10 +32,7 @@
 								"width": "auto",
 								"add": ""
 							    }],
-							    "values": [{
-								"ID": "00000000",
-								"Reference": "todo"
-							    }
+							    "values": [
 								]
 								},
 								{ "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
