@@ -132,7 +132,7 @@ class GenericEEP extends IPSModule {
 		//$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
 		$data = json_decode( $this );
-		IPS_LogMessage ( "FTS12 Device ID (HEX)", $data );
+		IPS_LogMessage ( "FTS12 Device ID (HEX)", $this );
 		
 		$values = $data->actions[0]->popup->items[0]->values;
 		
