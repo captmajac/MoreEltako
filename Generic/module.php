@@ -143,14 +143,16 @@ class GenericEEP extends IPSModule {
 		
 		$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
-		//Only add default element if we do not have anything in persistence
-		$data->elements["Actors"]->values[] = Array(
-					"ID" => "A0000000",
-					"Reference" => "ABCD"
-					);
+		$values = $data->actions[0]->popup->items[0]->values;
+		
+		$newValue = new stdClass;
+		$newValue->ID = "hallo";
+		$newValue->Reference = "todo"; 
+		
+		$values[] = $newValue;
 		
 	
-		$this->UpdateFormField("Actors", "values", $data->elements["Actors"] );
+		$this->UpdateFormField("Actors", "values", $values );
 		//$this->ReloadForm();
 	}
 	
