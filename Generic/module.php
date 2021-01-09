@@ -21,9 +21,9 @@ class GenericEEP extends IPSModule {
 
 		IPS_LogMessage("Buffer",$this->GetBuffer("Serach"));
 		
-		if ($this->GetBuffer("Serach") != "true")
+		//if ($this->GetBuffer("Serach") != "true")
 		{
-			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 
 	}
@@ -90,11 +90,12 @@ class GenericEEP extends IPSModule {
 		{
 			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
+			$this->SetReceiveDataFilter("");
 			// TODO: Timer starten für zeitlich begrenze suche
 		}
 		else
 		{
-			$this->SetBuffer("Serach", "false");
+			$this->SetBuffer("Serach", "");
 			$this->SetBuffer("Test","");
 		}
 	}
