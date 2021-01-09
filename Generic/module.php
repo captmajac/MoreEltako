@@ -23,7 +23,7 @@ class GenericEEP extends IPSModule {
 		
 		if ($this->GetBuffer("Serach") != "true")
 		{
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 
 	}
