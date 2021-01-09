@@ -144,7 +144,7 @@ class GenericEEP extends IPSModule {
 		$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
 		//Only add default element if we do not have anything in persistence
-		$data->elements[""]->values[] = Array(
+		$data->elements["Actors"]->values[] = Array(
 					"ID" => "A0000000",
 					"Reference" => "ABCD"
 					);
