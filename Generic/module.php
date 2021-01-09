@@ -19,7 +19,7 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 
-		if ($this->GetBuffer("Serach") <> "true")
+		if ($this->GetBuffer("Serach") != "true")
 		{
 			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
@@ -44,22 +44,11 @@ class GenericEEP extends IPSModule {
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
-			$tmp = $this->GetBuffer("Test");
+			
 			
 			// führende nullen für Hex
-			$tmp = $tmp.str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) ;
-
-			//IPS_LogMessage ( "FTS12 Device ID (HEX)", $tmp );
-			$this->SetBuffer("Test",$tmp);
-			
-			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-			
-			IPS_LogMessage ( "FTS12 Device ID (HEX)", $Form['actions']['popup'] );
-			
-			
-			
-			$this->UpdateFormField("Actors", "values", "asdadads");
-			$this->ReloadForm();
+			$ValidDevID = str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) ;
+			updateList($ValidDevID, "todo");
 		}
 		else {
 			$this->ProcessData ( $data );
@@ -139,16 +128,15 @@ class GenericEEP extends IPSModule {
 		
 	}
 	
-	public function test() {
+	public function updateList(string $DevID, string $Reference) {
 		
 		$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
 		$values = $data->actions[0]->popup->items[0]->values;
 		
 		$newValue = new stdClass;
-		$newValue->ID = "hallo";
-		$newValue->Reference = "todo"; 
-		
+		$newValue->ID = $DevID;
+		$newValue->Reference = $Reference; 
 		$values[] = $newValue;
 		
 	
