@@ -35,7 +35,7 @@
 							    "values": [
 								]
 								},
-								{ "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
+								{ "type": "Button", "caption": "Apply selected", "onClick":  "print_r( $Actors);GenericEEP_SetSelectedModul($id, $Actors[\"ID\"]);"
 								}
 						    ]
 						}
