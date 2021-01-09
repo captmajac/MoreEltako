@@ -58,8 +58,8 @@ class GenericEEP extends IPSModule {
 			
 			
 			
-			// $this->UpdateFormField("Actors", "values", "json string");
-			//$this->ReloadForm();
+			$this->UpdateFormField("Actors", "values", "asdadads");
+			$this->ReloadForm();
 		}
 		else {
 			$this->ProcessData ( $data );
@@ -138,5 +138,12 @@ class GenericEEP extends IPSModule {
 		
 		
 	}
+	
+	public function test(string $state) {
+		
+		$this->UpdateFormField("Actors", "values", "asdadads");
+		$this->ReloadForm();
+	}
+	
 }
 ?>
