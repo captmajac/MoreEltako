@@ -19,6 +19,8 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 
+		IPS_LogMessage("Buffer",$this->GetBuffer("Serach"));
+		
 		if ($this->GetBuffer("Serach") != "true")
 		{
 			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
@@ -44,11 +46,8 @@ class GenericEEP extends IPSModule {
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
-			// führende nullen für Hex
+			// führende Nullen und in 8 Zeichen Grossbuchstaben formatieren
 			$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
-			
-			IPS_LogMessage ( "FTS12 Device ID (HEX)", $ValidDevID );
-			
 			$this->updateList($ValidDevID, "todo");
 		}
 		else {
@@ -64,26 +63,6 @@ class GenericEEP extends IPSModule {
 		SetValue ( $this->GetIDForIdent ( "Data3" ), $data->{'DataByte3'} );
 	}
 
-	/*
-	 * protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
-	 * {
-	 * if (!IPS_VariableProfileExists($Name))
-	 * {
-	 * IPS_CreateVariableProfile($Name, 2);
-	 * }
-	 * else
-	 * {
-	 * $profile = IPS_GetVariableProfile($Name);
-	 * if ($profile['ProfileType'] != 2)
-	 * throw new Exception("Variable profile type does not match for profile " . $Name);
-	 * }
-	 * IPS_SetVariableProfileIcon($Name, $Icon);
-	 * IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-	 * IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-	 * IPS_SetVariableProfileDigits($Name, $Digits);
-	 *
-	 * }
-	 */
 	protected function SendDebug($Message, $Data, $Format) {
 		if (is_array ( $Data )) {
 			foreach ( $Data as $Key => $DebugData ) {
@@ -110,6 +89,7 @@ class GenericEEP extends IPSModule {
 		{
 			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
+			// TODO: Timer starten für zeitlich begrenze suche
 		}
 		else
 		{
@@ -124,23 +104,19 @@ class GenericEEP extends IPSModule {
 		$this->SetBuffer("List","");
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
 		IPS_ApplyChanges($this->InstanceID);
-		
-		
 	}
 	
 	public function updateList(string $DevID, string $Reference) {
 		
-		//$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
+		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
-		//IPS_LogMessage ( "FTS12 Device ID (HEX)", $this );
-		
-		//$values = $data->actions[0]->popup->items[0]->values;
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
 		$newValue->Reference = $Reference; 
 		
+		// Nur zur Liste/Update wenn noch nicht enthalten
 		if (in_array($newValue->ID  ,  array_column($values, 'ID') ) == false)
 		{
 			$values[] = $newValue;
