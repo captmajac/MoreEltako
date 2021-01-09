@@ -132,7 +132,7 @@ class GenericEEP extends IPSModule {
 		
 		//$data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 		
-		$values = GetBuffer("List");//json_decode( $this );
+		$values = json_decode(GetBuffer("List"));//json_decode( $this );
 		//IPS_LogMessage ( "FTS12 Device ID (HEX)", $this );
 		
 		//$values = $data->actions[0]->popup->items[0]->values;
@@ -141,10 +141,11 @@ class GenericEEP extends IPSModule {
 		$newValue->ID = $DevID;
 		$newValue->Reference = $Reference; 
 		$values[] = $newValue;
-		SetBuffer("List",$values);
+		$jsValues = json_encode($values);
+		SetBuffer("List",$jsValues);
 		
 	
-		$this->UpdateFormField("Actors", "values", json_encode($values) );
+		$this->UpdateFormField("Actors", "values", $jsValues );
 	}
 	
 }
