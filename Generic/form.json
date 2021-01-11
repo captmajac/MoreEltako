@@ -12,6 +12,7 @@
 					
 					
 					"popup": {
+						"name": "SButton",
 					    "caption": "Search Device",
 					    "items": [
 							{
@@ -35,7 +36,7 @@
 							    "values": [
 								]
 								},
-								{ "name": "SButton", "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors);"
+								{  "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors);"
 								}
 						    ]
 						}
