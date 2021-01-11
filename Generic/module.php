@@ -88,7 +88,7 @@ class GenericEEP extends IPSModule {
 		{
 			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
-			$this->SetReceiveDataFilter("");
+			$this->SetReceiveDataFilter("[*]*");
 			// TODO: Timer starten für zeitlich begrenze suche
 		}
 		else
