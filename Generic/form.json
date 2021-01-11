@@ -37,7 +37,7 @@
 								},
 								{  "type": "Button", "caption": "Apply selected", "onClick":  "GenericEEP_SetSelectedModul($id, $Actors);"
 								},
-								{  "type": "Label", "name": "TimeLabel", "caption": "Suche läuft" }
+								{  "type": "Label", "name": "TimeLabel", "caption": "Suche läuft..." }
 						    ]
 						}
 				    }
