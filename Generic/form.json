@@ -12,7 +12,6 @@
 					
 					
 					"popup": {
-						"name": "SButton",
 					    "caption": "Search Device",
 					    "items": [
 							{
