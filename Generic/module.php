@@ -105,7 +105,7 @@ class GenericEEP extends IPSModule {
 		IPS_ApplyChanges($this->InstanceID);
 	}
 	
-	public function EmptyList()
+	public function EmptyList(Object $List)
 	{
 		if ($this->GetBuffer("List") == "")
 		{
@@ -113,8 +113,7 @@ class GenericEEP extends IPSModule {
 		}
 		else
 		{
-			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
-			IPS_LogMessage("xxx",$values);
+			IPS_LogMessage("xxx",$List);
 			
 			return false;
 		}
