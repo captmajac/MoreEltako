@@ -88,7 +88,6 @@ class GenericEEP extends IPSModule {
 		{
 			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
-			$this->SetReceiveDataFilter("[*]*");
 			$this->SetReceiveDataFilter("");
 			// TODO: Timer starten für zeitlich begrenze suche
 		}
@@ -127,14 +126,17 @@ class GenericEEP extends IPSModule {
 			print_r ("voll");
 		}
 		
-		if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
+		if ($values != null)
 		{
-			$values[] = $newValue;
-			
-			$jsValues = json_encode($values);
-			$this->SetBuffer("List",$jsValues);
-			
-			$this->UpdateFormField("Actors", "values", $jsValues );
+			if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
+			{
+				$values[] = $newValue;
+				
+				$jsValues = json_encode($values);
+				$this->SetBuffer("List",$jsValues);
+				
+				$this->UpdateFormField("Actors", "values", $jsValues );
+			}
 		}
 		
 	}
