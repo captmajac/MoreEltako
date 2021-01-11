@@ -112,10 +112,10 @@ class GenericEEP extends IPSModule {
 			$tmpException = $List["ID"];	
 		} catch (Exception $e) {
 			print_r($tmpException);
-			return false;
+			return true;
 		}
 
-		return true;		
+		return false;		
 	}
 
 	
