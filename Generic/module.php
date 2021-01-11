@@ -97,7 +97,7 @@ class GenericEEP extends IPSModule {
 	}
 	
 
-	public function SetSelectedModul(IPSList $List) {
+	public function SetSelectedModul(object $List) {
 		
 		try {
 			$DevID = $List["ID"];
