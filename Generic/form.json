@@ -12,7 +12,7 @@
 					
 					
 					"popup": {
-					    "caption": "Choose Device",
+					    "caption": "Search Device",
 					    "items": [
 							{
 							    "type": "List",

@@ -5,6 +5,8 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
+		
+		$this->RegisterTimer("SearchTime", 0, "$this->TimerEvent();");
 
 
 		// Connect to available enocean gateway
@@ -89,11 +91,13 @@ class GenericEEP extends IPSModule {
 			$this->SetReceiveDataFilter("");
 			$this->UpdateFormField("Actors", "values", "" );
 			// TODO: Timer starten für zeitlich begrenze suche
+			$this->SetTimerInterval("SearchTime", 1000*60);
 		}
 		else
 		{
 			$this->SetBuffer("Serach", "");
 			$this->SetBuffer("Test","");
+			$this->SetTimerInterval("SearchTime", 0);
 		}
 	}
 	
@@ -108,6 +112,13 @@ class GenericEEP extends IPSModule {
 		IPS_ApplyChanges($this->InstanceID);
 		
 	}
+
+	public function TimerEvent() {
+		
+		print_r("timer");
+		$this->SetTimerInterval("SearchTime", 0);
+	}
+	
 
 	
 	public function updateList(string $DevID) {
