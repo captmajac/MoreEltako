@@ -35,7 +35,7 @@
 							    "values": [
 								]
 								},
-								{ "type": "Button", "caption": "Apply selected", "onClick":  "try{$tmp=$Actors[\"ID\"]}catch(Error $e){return;};GenericEEP_SetSelectedModul($id, $Actors);"
+								{ "type": "Button", "caption": "Apply selected", "onClick":  "try{$tmp=$Actors[\"ID\"];}catch(Error $e){return;};GenericEEP_SetSelectedModul($id, $Actors);"
 								}
 						    ]
 						}
