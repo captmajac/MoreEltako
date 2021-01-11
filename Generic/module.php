@@ -126,6 +126,7 @@ class GenericEEP extends IPSModule {
 			$this->UpdateFormField("Actors", "values", $jsValues );
 		}
 		
+
 		
 	}
 	
