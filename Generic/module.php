@@ -103,17 +103,18 @@ class GenericEEP extends IPSModule {
 		//try{@$tmp=isset($Actors[\"ID\"]);}catch(Error $e){return;}catch(Exception $e){return;};
 
 		try {
-			//$DevID = $List["ID"];
-			$DevID="00000000";
-			
-			$this->SetBuffer("Serach", "");
-			$this->SetBuffer("List","");
-			IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
-			IPS_ApplyChanges($this->InstanceID);
-			
-		} catch (Error $e) {
+			$DevID = $List["ID"];
+			//$DevID="00000000";
+		} catch (Exception $e) {
 			print_r("******NICHTS Ausgewählt");
+			return;
 		}
+		
+		$this->SetBuffer("Serach", "");
+		$this->SetBuffer("List","");
+		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
+		IPS_ApplyChanges($this->InstanceID);
+		
 	}
 
 	
