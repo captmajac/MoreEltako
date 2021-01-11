@@ -108,6 +108,13 @@ class GenericEEP extends IPSModule {
 	public function EmptyList(IPSList $List)
 	{
 		
+		try {
+			$tmpException = $List["ID"];
+			print_r($tmpException);
+		} catch (Exception $e) {
+			print_r($tmpException);
+			return false;
+		}
 		
 		if ($this->GetBuffer("List") == "")
 		{
@@ -117,7 +124,7 @@ class GenericEEP extends IPSModule {
 		{
 			print_r ($List[0]);
 			
-			return false;
+			return true;
 		}
 		
 	}
