@@ -99,6 +99,8 @@ class GenericEEP extends IPSModule {
 
 	public function SetSelectedModul(object $List) {
 		
+		//try{@$tmp=isset($Actors[\"ID\"]);}catch(Error $e){return;}catch(Exception $e){return;};
+
 		try {
 			$DevID = $List["ID"];
 			
