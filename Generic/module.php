@@ -120,9 +120,9 @@ class GenericEEP extends IPSModule {
 
 			
 
-			try {
+	
 			
-				if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
+				if (@in_array($newValue->ID , array_column($values, 'ID') ) == false)
 				{
 					$values[] = $newValue;
 					
@@ -132,10 +132,7 @@ class GenericEEP extends IPSModule {
 					$this->UpdateFormField("Actors", "values", $jsValues );
 				}
 				
-			} catch (Exception $e) {
-				IPS_LogMessage("xxx",$e);
-				// do nothing 
-			}
+	
 
 			
 		
