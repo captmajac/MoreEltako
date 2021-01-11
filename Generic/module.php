@@ -118,19 +118,26 @@ class GenericEEP extends IPSModule {
 		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
 		
 
-			print_r ($values);
+			
 
-		
-
-			if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
-			{
-				$values[] = $newValue;
+			try {
+			
+				if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
+				{
+					$values[] = $newValue;
+					
+					$jsValues = json_encode($values);
+					$this->SetBuffer("List",$jsValues);
+					
+					$this->UpdateFormField("Actors", "values", $jsValues );
+				}
 				
-				$jsValues = json_encode($values);
-				$this->SetBuffer("List",$jsValues);
-				
-				$this->UpdateFormField("Actors", "values", $jsValues );
+			} catch (Exception $e) {
+				IPS_LogMessage("xxx",$e);
+				// do nothing 
 			}
+
+			
 		
 		
 	}
