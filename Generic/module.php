@@ -112,7 +112,7 @@ class GenericEEP extends IPSModule {
 	// timer aufruf zeit aktualisierung
 	public function TimerEventUpdate() {
 		
-		$this->UpdateFormField("Actors", "caption", "...." );
+		$this->UpdateFormField("TimeLabel", "caption", "...." );
 		
 		$this->SetTimerInterval("UpdateTime", 1000 * 10);
 	} 
