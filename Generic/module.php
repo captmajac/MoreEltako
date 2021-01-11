@@ -105,17 +105,18 @@ class GenericEEP extends IPSModule {
 		IPS_ApplyChanges($this->InstanceID);
 	}
 	
-	public function EmptyList(object $List)
+	public function EmptyList(IPSList $List)
 	{
 		
 		try {
 			$tmpException = $List["ID"];	
 			
 		} catch (Error $e) {
-			//print_r($tmpException);
+			print_r("******TRUE");
 			return true;
 		}
 
+		print_r("******FALSE");
 		return false;		
 	}
 
