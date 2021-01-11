@@ -111,7 +111,7 @@ class GenericEEP extends IPSModule {
 		try {
 			//$tmpException = $List["ID"];
 			
-			print_r($his);
+			print_r($this->GetConfigurationForm());
 		} catch (Exception $e) {
 			print_r($tmpException);
 			return false;
