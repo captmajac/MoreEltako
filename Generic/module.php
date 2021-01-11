@@ -113,7 +113,9 @@ class GenericEEP extends IPSModule {
 	public function TimerEventUpdate() {
 		
 		$this->UpdateFormField("popup", "caption", "...." );
-		$this->SetTimerInterval("UpdateTime", 0);
+		IPS_ApplyChanges($this->InstanceID);
+		
+		$this->SetTimerInterval("UpdateTime", 1000 * 10);
 	} 
 	
 	public function SetSelectedModul(object $List) {
