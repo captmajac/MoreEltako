@@ -6,7 +6,7 @@ class GenericEEP extends IPSModule {
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
 		
-		$this->RegisterTimer("SearchTime", 0, "GenericEEP_TimerEvent(\$id);");
+		$this->RegisterTimer("SearchTime",0,'IPS_RequestAction($_IPS["TARGET"]);');
 
 
 		// Connect to available enocean gateway
@@ -101,7 +101,13 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-
+	// timer aufruf, also prüfen welcher Timer
+	public function RequestAction() {
+		
+		print_r("timer");
+		$this->SetTimerInterval("SearchTime", 0);
+	} 
+	
 	public function SetSelectedModul(object $List) {
 
 		@$DevID = $List["ID"];
@@ -113,12 +119,6 @@ class GenericEEP extends IPSModule {
 		
 	}
 
-	public function TimerEvent() {
-		
-		print_r("timer");
-		$this->SetTimerInterval("SearchTime", 0);
-	}
-	
 
 	
 	public function updateList(string $DevID) {
