@@ -109,24 +109,13 @@ class GenericEEP extends IPSModule {
 	{
 		
 		try {
-			//$tmpException = $List["ID"];
-			
-			IPS_LogMessage("xxx", $this->GetConfigurationForm() );
+			$tmpException = $List["ID"];	
 		} catch (Exception $e) {
 			print_r($tmpException);
 			return false;
 		}
-		
-		if ($this->GetBuffer("List") == "")
-		{
-			return true;
-		}
-		else
-		{
-			print_r ($List[0]);
-			
-			return true;
-		}		
+
+		return true;		
 	}
 
 	
