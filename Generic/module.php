@@ -109,8 +109,9 @@ class GenericEEP extends IPSModule {
 	{
 		
 		try {
-			$tmpException = $List["ID"];
-			print_r($tmpException);
+			//$tmpException = $List["ID"];
+			
+			print_r($his);
 		} catch (Exception $e) {
 			print_r($tmpException);
 			return false;
@@ -125,9 +126,9 @@ class GenericEEP extends IPSModule {
 			print_r ($List[0]);
 			
 			return true;
-		}
-		
+		}		
 	}
+
 	
 	public function updateList(string $DevID) {
 		
