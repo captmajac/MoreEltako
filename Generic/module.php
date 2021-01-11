@@ -103,7 +103,8 @@ class GenericEEP extends IPSModule {
 		//try{@$tmp=isset($Actors[\"ID\"]);}catch(Error $e){return;}catch(Exception $e){return;};
 
 		try {
-			$DevID = $List["ID"];
+			//$DevID = $List["ID"];
+			$DevID="00000000";
 			
 			$this->SetBuffer("Serach", "");
 			$this->SetBuffer("List","");
