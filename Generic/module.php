@@ -99,8 +99,6 @@ class GenericEEP extends IPSModule {
 
 	public function SetSelectedModul(string $DevID) {
 		
-		IPS_LogMessage("xxx",$DevID);
-		
 		$this->SetBuffer("Serach", "");
 		$this->SetBuffer("List","");
 		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
@@ -115,6 +113,9 @@ class GenericEEP extends IPSModule {
 		}
 		else
 		{
+			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
+			IPS_LogMessage("xxx",$values);
+			
 			return false;
 		}
 		
