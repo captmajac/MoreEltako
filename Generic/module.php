@@ -107,6 +107,19 @@ class GenericEEP extends IPSModule {
 		IPS_ApplyChanges($this->InstanceID);
 	}
 	
+	public function EmptyList()
+	{
+		if ($this->GetBuffer("List") == "")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
 	public function updateList(string $DevID) {
 		
 		
