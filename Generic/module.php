@@ -7,7 +7,7 @@ class GenericEEP extends IPSModule {
 		$this->RegisterPropertyString ( "DeviceID", "" );
 		
 		$this->RegisterTimer("SearchTime",0,"GenericEEP_TimerEvent(\$_IPS['TARGET']);");
-
+		$this->RegisterTimer("UpdateTime",0,"GenericEEP_TimerEventUpdate(\$_IPS['TARGET']);");
 
 		// Connect to available enocean gateway
 		$this->ConnectParent ( "{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}" );
@@ -92,19 +92,28 @@ class GenericEEP extends IPSModule {
 			$this->UpdateFormField("Actors", "values", "" );
 			// TODO: Timer starten für zeitlich begrenze suche
 			$this->SetTimerInterval("SearchTime", 1000*60);
+			$this->SetTimerInterval("UpdateTime", 1000*10);
 		}
 		else
 		{
 			$this->SetBuffer("Serach", "");
 			$this->SetBuffer("Test","");
 			$this->SetTimerInterval("SearchTime", 0);
+			$this->SetTimerInterval("UpdateTime", 0);
 		}
 	}
 	
-	// timer aufruf, also prüfen welcher Timer
+	// timer aufruf, suchzeit abgelaufen
 	public function TimerEvent() {
 		
 		$this->SetTimerInterval("SearchTime", 0);
+	} 
+
+	// timer aufruf zeit aktualisierung
+	public function TimerEventUpdate() {
+		
+		$this->UpdateFormField("popup", "caption", "...." );
+		$this->SetTimerInterval("UpdateTime", 0);
 	} 
 	
 	public function SetSelectedModul(object $List) {
