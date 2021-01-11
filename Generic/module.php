@@ -18,8 +18,6 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data1", "Data1" );
 		$this->RegisterVariableInteger ( "Data2", "Data2" );
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
-
-		//IPS_LogMessage("Buffer",$this->GetBuffer("Serach"));
 		
 		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		
@@ -116,25 +114,17 @@ class GenericEEP extends IPSModule {
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
 		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
-		
 
 			
-
-	
+		if (@in_array($newValue->ID , array_column($values, 'ID') ) == false)
+		{
+			$values[] = $newValue;
 			
-				if (@in_array($newValue->ID , array_column($values, 'ID') ) == false)
-				{
-					$values[] = $newValue;
-					
-					$jsValues = json_encode($values);
-					$this->SetBuffer("List",$jsValues);
-					
-					$this->UpdateFormField("Actors", "values", $jsValues );
-				}
-				
-	
-
+			$jsValues = json_encode($values);
+			$this->SetBuffer("List",$jsValues);
 			
+			$this->UpdateFormField("Actors", "values", $jsValues );
+		}
 		
 		
 	}
