@@ -104,7 +104,6 @@ class GenericEEP extends IPSModule {
 	// timer aufruf, also prüfen welcher Timer
 	public function TimerEvent() {
 		
-		print_r("timer");
 		$this->SetTimerInterval("SearchTime", 0);
 	} 
 	
