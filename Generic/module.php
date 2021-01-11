@@ -117,17 +117,11 @@ class GenericEEP extends IPSModule {
 		$newValue->ID = $DevID;
 		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
 		
-		if ($values != null)
-		{
-			print_r ("null");
-		}
-		else
-		{
+
 			print_r ($values);
-		}
+
 		
-		if ($values != null)
-		{
+
 			if (in_array($newValue->ID , array_column($values, 'ID') ) == false)
 			{
 				$values[] = $newValue;
@@ -137,7 +131,7 @@ class GenericEEP extends IPSModule {
 				
 				$this->UpdateFormField("Actors", "values", $jsValues );
 			}
-		}
+		
 		
 	}
 	
