@@ -123,7 +123,7 @@ class GenericEEP extends IPSModule {
 		}
 		else
 		{
-			print_r ("voll");
+			print_r ($values);
 		}
 		
 		if ($values != null)
