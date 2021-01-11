@@ -101,11 +101,11 @@ class GenericEEP extends IPSModule {
 		
 		try {
 			$DevID = $List["ID"];
-			
+			/*
 			$this->SetBuffer("Serach", "");
 			$this->SetBuffer("List","");
 			IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
-			IPS_ApplyChanges($this->InstanceID);
+			IPS_ApplyChanges($this->InstanceID);*/
 			
 		} catch (Error $e) {
 			print_r("******NICHTS Ausgewählt");
