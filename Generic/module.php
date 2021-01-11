@@ -41,7 +41,7 @@ class GenericEEP extends IPSModule {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
 
-		IPS_LogMessage("xxx",$this);
+		//IPS_LogMessage("xxx",$this);
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
@@ -89,7 +89,7 @@ class GenericEEP extends IPSModule {
 			$this->SetBuffer("Serach", "true");
 			$this->SetBuffer("Test","");
 			$this->SetReceiveDataFilter("[*]*");
-			IPS_ApplyChanges($this->InstanceID);
+			$this->SetReceiveDataFilter("");
 			// TODO: Timer starten für zeitlich begrenze suche
 		}
 		else
