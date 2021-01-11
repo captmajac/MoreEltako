@@ -113,7 +113,7 @@ class GenericEEP extends IPSModule {
 		}
 		else
 		{
-			IPS_LogMessage("xxx",$List);
+			print_r ($List);
 			
 			return false;
 		}
