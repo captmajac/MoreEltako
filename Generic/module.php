@@ -5,7 +5,6 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
-		
 		$this->RegisterTimer("SearchTime",0,"GenericEEP_TimerEvent(\$_IPS['TARGET']);");
 
 		// Connect to available enocean gateway
@@ -21,8 +20,6 @@ class GenericEEP extends IPSModule {
 		$this->RegisterVariableInteger ( "Data3", "Data3" );
 		
 		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
-		
-
 	}
 
 	/*
@@ -39,8 +36,6 @@ class GenericEEP extends IPSModule {
 	public function ReceiveData($JSONString) {
 		$data = json_decode ( $JSONString );
 		$this->SendDebug ( "EnoceanGatewayData", $JSONString, 0 );
-
-		//IPS_LogMessage("xxx",$this);
 		
 		if ($this->GetBuffer("Serach")=="true")
 		{
@@ -75,12 +70,7 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-	public function GetConfigurationForm() {
-		
-		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-		return json_encode($Form);
-	}
-	
+
 	public function SearchModules(string $state) {
 		
 		if ($state=="true")
@@ -88,7 +78,7 @@ class GenericEEP extends IPSModule {
 			$this->SetBuffer("Serach", "true");
 			$this->SetReceiveDataFilter("");
 			$this->UpdateFormField("Actors", "values", "" );
-			// TODO: Timer starten für zeitlich begrenzte suche
+			// Timer starten für zeitlich begrenzte Suche
 			$this->SetTimerInterval("SearchTime", 1000*60);
 			$this->UpdateFormField("TimeLabel", "caption", "Suche läuft..." );
 		}
@@ -107,7 +97,7 @@ class GenericEEP extends IPSModule {
 	
 	public function SetSelectedModul(object $List) {
 
-		@$DevID = $List["ID"];
+		@$DevID = $List["ID"]; 		// Kommt ein Error bei keiner Auswahl
 
 		$this->SetBuffer("Serach", "");
 		$this->SetBuffer("List","");
@@ -117,22 +107,19 @@ class GenericEEP extends IPSModule {
 		{
 			IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
 		}
-		// Apply schließt auch popup
-		IPS_ApplyChanges($this->InstanceID);
-		
+		// Apply schliesst auch popup
+		IPS_ApplyChanges($this->InstanceID);		
 	}
 
 
 	
 	public function updateList(string $DevID) {
-		
-		
 		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
-		$newValue->Reference = "todo"; 		// hier noch nach schon eingesetzter Enocean Referenz suchen
+		$newValue->Reference = "not implemented"; 		// hier ggf. nach schon eingesetzter Enocean Referenz suchen
 
 			
 		if (@in_array($newValue->ID , array_column($values, 'ID') ) == false)
@@ -144,9 +131,6 @@ class GenericEEP extends IPSModule {
 			
 			$this->UpdateFormField("Actors", "values", $jsValues );
 		}
-		
-
-		
 	}
 	
 }
