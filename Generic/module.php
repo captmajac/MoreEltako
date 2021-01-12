@@ -112,7 +112,20 @@ class GenericEEP extends IPSModule {
 		@$DevID = $List["ID"];
 
 		// TODO: wenn keiner selektiert wird dann ist auch die Device nicht in apply übernommen worden
-		print_r("xxx".$DevID);
+		if (isset($DevID)==false)
+		{
+			print_r("isset".$DevID);
+		}
+		
+		if ($DevID=="")
+		{
+			print_r("leer".$DevID);
+		}
+		
+		if ($DevID==null)
+		{
+			print_r("null".$DevID);
+		}
 		
 		$this->SetBuffer("Serach", "");
 		$this->SetBuffer("List","");
