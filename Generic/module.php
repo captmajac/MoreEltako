@@ -115,7 +115,7 @@ class GenericEEP extends IPSModule {
 	// ggf. auch entscheiden was in der Liste aufgenommen werden soll
 	// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
 	//
-	public function updateList(string $DevID, string $data) {
+	public function updateList(string $DevID, object $data) {
 		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 		
