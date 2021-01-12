@@ -150,7 +150,7 @@ class GenericEEP extends IPSModule {
 		
 		//IPS_LOGMESSAGE("xxx",$Form);
 		
-		//$NewForm = array_merge($ChildForm, $Form);
+		$NewForm = array_merge($ChildForm, $Form);
 		$NewForm = $ChildForm;
 		
 		return $NewForm;
