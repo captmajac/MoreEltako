@@ -53,7 +53,7 @@ class FTS12 extends GenericEEP
 			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
 			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
 			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
-			else if (strcmp(dechex($data->{'0X00'}), "0") === 0
+			else if (strcmp(dechex($data->{'DataByte0'}), "0") === 0
 			and GetValue($this->GetIDForIdent("Pressed"))==true)
 			{
 				$this->ProcessRelease($data);
@@ -62,7 +62,6 @@ class FTS12 extends GenericEEP
 		
 		private function ProcessPress($Data)
 		{ 	// daten auswerten ->taste gedrückt
-			IPS_LogMessage("FTS12 Device","gedrückt");
 			SetValue($this->GetIDForIdent("Pressed"), true);
 			SetValue($this->GetIDForIdent("PressedLong"), false);
 			SetValue($this->GetIDForIdent("PressedShort"), false);
@@ -71,7 +70,6 @@ class FTS12 extends GenericEEP
 		private function ProcessRelease($Data)
 		{ 	// daten auswerten ->taste losgelassen
 			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
-			IPS_LogMessage("FTS12 Device","losgelassen");
 			
 			// zeit different ausrechnen für kurzer langer tastendruck
 			$diff= microtime(true) - IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated'];
