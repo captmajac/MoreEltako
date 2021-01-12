@@ -41,7 +41,7 @@ class GenericEEP extends IPSModule {
 		{
 			// führende Nullen und in 8 Zeichen Grossbuchstaben formatieren
 			$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
-			$this->updateList($ValidDevID);
+			$this->updateList($ValidDevID, $data);
 		}
 		else {
 			$this->ProcessData ( $data );
@@ -112,8 +112,10 @@ class GenericEEP extends IPSModule {
 	}
 
 
-	
-	public function updateList(string $DevID) {
+	// ggf. auch entscheiden was in der Liste aufgenommen werden soll
+	// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
+	//
+	public function updateList(string $DevID, string $data) {
 		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 		
