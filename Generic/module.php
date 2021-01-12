@@ -155,13 +155,10 @@ class GenericEEP extends IPSModule {
 		if (array_key_exists("actions", $ChildForm) ==false){$ChildForm["actions"] = array();};
 		if (array_key_exists("actions", $Form) ==false){$Form["actions"] = array();};
 		
-		$NewFormElements = array_merge($ChildForm["elements"], $Form["elements"]);
-		$NewFormStatus = array_merge($ChildForm["status"], $Form["status"]);
-		$NewFormActions = array_merge($ChildForm["actions"], $Form["actions"]);
 		// Arrays ersetzen
-		$NewForm["elements"]=$NewFormElements;
-		$NewForm["status"]=$NewFormStatus;
-		$NewForm["actions"]=$NewFormActions;
+		$NewForm["elements"]= array_merge($ChildForm["elements"], $Form["elements"]);
+		$NewForm["status"]= array_merge($ChildForm["status"], $Form["status"]);
+		$NewForm["actions"]= array_merge($ChildForm["actions"], $Form["actions"]);
 		
 		return $NewForm;
 	}
