@@ -1,11 +1,10 @@
 <?
-	class FTS12 extends IPSModule
+class FTS12 extends GenericEEP
 	{
 		public function Create() 
 		{
 			//Never delete this line!
 			parent::Create();
-			$this->RegisterPropertyString("DeviceID", "");
 			$this->RegisterPropertyString("Data0", "");
 			
 			//Connect to available enocean gateway
@@ -21,7 +20,7 @@
 			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
 			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
 			
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 		
 		/*
@@ -38,6 +37,8 @@
 		
 		public function ReceiveData($JSONString)
 		{
+			parent::ReceiveData($JSONString);
+			
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
 			
