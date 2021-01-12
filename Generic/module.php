@@ -150,9 +150,15 @@ class GenericEEP extends IPSModule {
 		
 		//IPS_LOGMESSAGE("xxx",$Form);
 		
-		$NewForm = array_merge($ChildForm, $Form);
+		$NewFormElements = array_merge($ChildForm["elements"], $Form["elements"]);
+		$NewFormStatus = array_merge($ChildForm["status"], $Form["status"]);
+		$NewFormActions = array_merge($ChildForm["actions"], $Form["actions"]);
+		// Arrays ersetzen
+		$ChildForm['elements']=$NewFormElements;
+		$ChildForm['status']=$NewFormStatus;
+		$ChildForm['actions']=$NewFormActions;
 		
-		return $NewForm;
+		return $ChildForm;
 	}
 	
 }
