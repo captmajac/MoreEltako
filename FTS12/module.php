@@ -139,7 +139,7 @@ class FTS12 extends GenericEEP
 			
 			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 			
-			$NewForm = parent::GetConfigurationForm($Form);
+			$NewForm = parent::AddConfigurationForm($Form);
 			return json_encode($NewForm);
 		}
 		
