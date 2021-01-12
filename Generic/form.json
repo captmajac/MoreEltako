@@ -8,7 +8,7 @@
 				    [
 					{ "type": "PopupButton",
 					"caption": "Search Device",
-					"onClick":  "$this->SearchModules($id,'true');",
+					"onClick":  "GenericEEP_SearchModules($id,'true');",
 					
 					
 					"popup": {

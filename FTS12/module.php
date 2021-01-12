@@ -135,11 +135,14 @@ class FTS12 extends GenericEEP
 		} 
 		
 		// form auslesen und dann dynamisch erweitern
-		public function GetConfigurationForm() {
-			
+		public function GetConfigurationForm() {			
 			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 			
-			$NewForm = parent::AddConfigurationForm($Form);
+			
+			
+			// darf nicht entfernt werden da am ende ein merge der forms durchgeführt wird
+			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true);
+			$NewForm = parent::AddConfigurationForm($Form, $Module["prefix"]);
 			return json_encode($NewForm);
 		}
 		
