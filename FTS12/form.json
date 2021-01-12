@@ -1,7 +1,7 @@
 {
 	"elements":
 	[
-		{ "name": "Data0", "type": "ValidationTextBox", "caption": "Data0 (HEX):" }
+		{ "name": "0X00", "type": "ValidationTextBox", "caption": "0X?? (HEX):" }
     		
 	]
 }

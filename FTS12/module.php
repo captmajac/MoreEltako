@@ -7,7 +7,7 @@ class FTS12 extends GenericEEP
 		{
 			//Never delete this line!
 			parent::Create();
-			$this->RegisterPropertyString("Data0", "");
+			$this->RegisterPropertyString("0X00", "");
 			
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -49,14 +49,14 @@ class FTS12 extends GenericEEP
 			
 			// prüfen 
 			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
-			if (strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0")) === 0)
+			if (strcmp(dechex($data->{'0X00'}), $this->ReadPropertyString("0X00")) === 0)
 			{
 				$this->ProcessPress($data);
 			}
 			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
 			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
 			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
-			else if (strcmp(dechex($data->{'DataByte0'}), "0") === 0
+			else if (strcmp(dechex($data->{'0X00'}), "0") === 0
 			and GetValue($this->GetIDForIdent("Pressed"))==true)
 			{
 				$this->ProcessRelease($data);
