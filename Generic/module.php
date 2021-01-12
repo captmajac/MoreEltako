@@ -147,8 +147,9 @@ class GenericEEP extends IPSModule {
 		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 		
 		print_r($Form);
-		$NewForm = array_merge($ChildForm, $Form);
 		
+		//$NewForm = array_merge($ChildForm, $Form);
+		$NewForm = $ChildForm;
 		
 		return $NewForm;
 	}
