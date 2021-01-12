@@ -86,51 +86,38 @@ class GenericEEP extends IPSModule {
 		if ($state=="true")
 		{
 			$this->SetBuffer("Serach", "true");
-			$this->SetBuffer("Test","");
 			$this->SetReceiveDataFilter("");
 			$this->UpdateFormField("Actors", "values", "" );
-			// TODO: Timer starten für zeitlich begrenze suche
+			// TODO: Timer starten für zeitlich begrenzte suche
 			$this->SetTimerInterval("SearchTime", 1000*60);
+			$this->UpdateFormField("TimeLabel", "caption", "Suche läuft..." );
 		}
 		else
 		{
 			$this->SetBuffer("Serach", "");
-			$this->SetBuffer("Test","");
+			$this->UpdateFormField("TimeLabel", "caption", "Suche abgelaufen" );
 			$this->SetTimerInterval("SearchTime", 0);
 		}
 	}
 	
 	// timer aufruf, suchzeit abgelaufen
 	public function TimerEvent() {
-		
-		$this->UpdateFormField("TimeLabel", "caption", "Suche abgelaufen" );
-		$this->SetTimerInterval("SearchTime", 0);
+		$this->SearchModules($this, "false");
 	} 
 	
 	public function SetSelectedModul(object $List) {
 
 		@$DevID = $List["ID"];
 
-		// TODO: wenn keiner selektiert wird dann ist auch die Device nicht in apply übernommen worden
-		if (isset($DevID)==false)
-		{
-			print_r("isset".$DevID);
-		}
-		
-		if ($DevID=="")
-		{
-			print_r("leer".$DevID);
-		}
-		
-		if ($DevID==null)
-		{
-			print_r("null".$DevID);
-		}
-		
 		$this->SetBuffer("Serach", "");
 		$this->SetBuffer("List","");
-		IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
-		IPS_ApplyChanges($this->InstanceID);
+		$this->SetTimerInterval("SearchTime", 0);
+		
+		if ($DevID!=null)
+		{
+			IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
+			IPS_ApplyChanges($this->InstanceID);
+		}
 		
 	}
 
