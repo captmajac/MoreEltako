@@ -148,15 +148,20 @@ class GenericEEP extends IPSModule {
 		
 		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 		
-		//IPS_LOGMESSAGE("xxx",$Form);
+		if (array_key_exists("elements", $ChildForm) ==false){$ChildForm["elements"] = array();};
+		if (array_key_exists("elements", $Form) ==false){$Form["elements"] = array();};
+		if (array_key_exists("status", $ChildForm) ==false){$ChildForm["status"] = array();};
+		if (array_key_exists("status", $Form) ==false){$Form["status"] = array();};
+		if (array_key_exists("actions", $ChildForm) ==false){$ChildForm["actions"] = array();};
+		if (array_key_exists("actions", $Form) ==false){$Form["actions"] = array();};
 		
 		$NewFormElements = array_merge($ChildForm["elements"], $Form["elements"]);
 		$NewFormStatus = array_merge($ChildForm["status"], $Form["status"]);
 		$NewFormActions = array_merge($ChildForm["actions"], $Form["actions"]);
 		// Arrays ersetzen
-		$NewForm['elements']=$NewFormElements;
-		$NewForm['status']=$NewFormStatus;
-		$NewForm['actions']=$NewFormActions;
+		$NewForm["elements"]=$NewFormElements;
+		$NewForm["status"]=$NewFormStatus;
+		$NewForm["actions"]=$NewFormActions;
 		
 		return $NewForm;
 	}
