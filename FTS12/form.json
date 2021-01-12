@@ -1,7 +1,6 @@
 {
 	"elements":
 	[
-		{ "name": "DeviceID", "type": "ValidationTextBox", "caption": "DeviceID (HEX):" },
 		{ "name": "Data0", "type": "ValidationTextBox", "caption": "Data0 (HEX):" }
     		
 	]

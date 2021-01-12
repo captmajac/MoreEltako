@@ -134,6 +134,14 @@ class FTS12 extends GenericEEP
 			}
 		} 
 		
-	
+		// form auslesen und dann dynamisch erweitern
+		public function GetConfigurationForm() {
+			
+			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+			
+			$NewForm = parent::GetConfigurationForm($Form);
+			return json_encode($NewForm);
+		}
+		
 	}
 ?>
