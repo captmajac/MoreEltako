@@ -102,7 +102,7 @@ class GenericEEP extends IPSModule {
 	
 	// timer aufruf, suchzeit abgelaufen
 	public function TimerEvent() {
-		$this->SearchModules($this, "false");
+		$this->SearchModules("false");
 	} 
 	
 	public function SetSelectedModul(object $List) {
@@ -116,8 +116,9 @@ class GenericEEP extends IPSModule {
 		if ($DevID!=null)
 		{
 			IPS_SetProperty ($this->InstanceID, "DeviceID", "".$DevID);
-			IPS_ApplyChanges($this->InstanceID);
 		}
+		// Apply schließt auch popup
+		IPS_ApplyChanges($this->InstanceID);
 		
 	}
 
