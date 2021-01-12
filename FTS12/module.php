@@ -1,4 +1,6 @@
 <?
+require_once __DIR__ . '/../Generic/module.php';  // diverse Klassen
+
 class FTS12 extends GenericEEP
 	{
 		public function Create() 
