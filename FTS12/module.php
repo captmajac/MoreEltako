@@ -1,5 +1,5 @@
 <?
-require_once __DIR__ . '/../Generic/module.php';  // diverse Klassen
+require_once __DIR__ . '/../Generic/module.php';  // Base Module.php
 
 class FTS12 extends GenericEEP
 	{
@@ -137,7 +137,7 @@ class FTS12 extends GenericEEP
 		// form auslesen und dann dynamisch erweitern
 		public function GetConfigurationForm() {
 			
-			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+			$Form = json_decode(file_get_contents(__DIR__ . '/../form.json'), true);
 			
 			$NewForm = parent::AddConfigurationForm($Form);
 			return json_encode($NewForm);
