@@ -43,13 +43,10 @@ class FTS12 extends GenericEEP
 			
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
-			
-			//IPS_LogMessage("FTS12 Device ID (HEX)",dechex($data->{'DeviceID'}));
-			//IPS_LogMessage("FTS12 Data0 (HEX)",dechex($data->{'DataByte0'}));
-			
+				
 			// prüfen 
 			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
-			if (strcmp(dechex($data->{'0X00'}), $this->ReadPropertyString("0X00")) === 0)
+			if (strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("0X00")) === 0)
 			{
 				$this->ProcessPress($data);
 			}
