@@ -151,7 +151,7 @@ class GenericEEP extends IPSModule {
 		$NewForm = $ChildForm;
 		
 		
-		return json_encode($NewForm);
+		return $NewForm;
 	}
 	
 }
