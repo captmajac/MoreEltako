@@ -7,8 +7,10 @@ class FTS12 extends GenericEEP
 		{
 			//Never delete this line!
 			parent::Create();
-			$this->RegisterPropertyString("0X00", "");
 			
+			
+			$this->RegisterPropertyString("0X00", "");
+	
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 		}
@@ -39,7 +41,8 @@ class FTS12 extends GenericEEP
 		
 		public function ReceiveData($JSONString)
 		{
-			parent::ReceiveData($JSONString);
+			//Never delete this line!
+			parent::ReceiveData($JSONString);	// muss aufgerufen werden damit die device suche geht
 			
 			$data = json_decode($JSONString);
 			$this->SendDebug("EnoceanGatewayData", $JSONString, 0);
@@ -85,7 +88,6 @@ class FTS12 extends GenericEEP
 				SetValue($this->GetIDForIdent("PressedShort"), true);
 			
 				
-	
 		}
 		
 		protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
@@ -135,8 +137,8 @@ class FTS12 extends GenericEEP
 			
 			
 			
-			// darf nicht entfernt werden da am ende ein merge der forms durchgeführt wird
-			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true);
+			//Never delete this line!
+			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// merge der form.json
 			$NewForm = parent::AddConfigurationForm($Form, $Module["prefix"]);
 			return json_encode($NewForm);
 		}

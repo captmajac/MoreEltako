@@ -5,6 +5,7 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
+		$this->RegisterPropertyBoolean ( "DataByte", false);
 		$this->RegisterTimer("SearchTime",0,"GenericEEP_TimerEvent(\$_IPS['TARGET']);");
 
 		// Connect to available enocean gateway
@@ -14,10 +15,20 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::ApplyChanges ();
 
-		$this->RegisterVariableInteger ( "Data0", "Data0" );
-		$this->RegisterVariableInteger ( "Data1", "Data1" );
-		$this->RegisterVariableInteger ( "Data2", "Data2" );
-		$this->RegisterVariableInteger ( "Data3", "Data3" );
+		if ($this->ReadPropertyString("DataByte") == true)
+		{
+			$this->RegisterVariableInteger ( "Data0", "Data0" );
+			$this->RegisterVariableInteger ( "Data1", "Data1" );
+			$this->RegisterVariableInteger ( "Data2", "Data2" );
+			$this->RegisterVariableInteger ( "Data3", "Data3" );
+		}
+		else 
+		{
+			UnregisterVariable("Data0");
+			UnregisterVariable("Data1");
+			UnregisterVariable("Data2");
+			UnregisterVariable("Data3");
+		}
 		
 		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 	}
@@ -44,7 +55,10 @@ class GenericEEP extends IPSModule {
 			$this->updateList($ValidDevID, $data);
 		}
 		else {
-			$this->ProcessData ( $data );
+			if ($this->ReadPropertyString("DataByte") == true)
+			{
+				$this->ProcessData ( $data );
+			}
 		}
 	}
 	
