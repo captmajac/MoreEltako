@@ -143,30 +143,48 @@ class FTS12 extends GenericEEP
 			return json_encode($NewForm);
 		}
 		
+		
+		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
+		public function SetSelectedModul(object $List) {
+			
+			@$DataByte = $List["Reference"]; 		// Kommt ein Error bei keiner Auswahl
+			
+			if ($DataByte!=null)
+			{
+				IPS_SetProperty ($this->InstanceID, "DataByte", "".dechex($data->{'DataByte0'}));
+			}
+			
+			//Never delete this line!
+			parent::SetSelectedModul($List);
+		}
+		
 		// ggf. auch entscheiden was in der Liste aufgenommen werden soll
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
-		//
+		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function updateList(string $DevID, object $data) {
 			// Device Liste als Buffer
 			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 			
-			$newValue = new stdClass;
+			
 			if ($data->{'DataByte0'}!="0")							// Bei Taster loslassen nicht aufnehmen
 			{
+				$newValue = new stdClass;
 				$newValue->ID = $DevID;
 				$newValue->Ident = $DevID."".$data->{'DataByte0'};	//identifier hier gleich der device id + Datenbyte <>00
 				$newValue->Reference = $data->{'DataByte0'}; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
+				
+				if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
+				{
+					$values[] = $newValue;
+					
+					$jsValues = json_encode($values);
+					$this->SetBuffer("List",$jsValues);
+					
+					$this->UpdateFormField("Actors", "values", $jsValues );
+				}
 			}
 			
-			if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
-			{
-				$values[] = $newValue;
-				
-				$jsValues = json_encode($values);
-				$this->SetBuffer("List",$jsValues);
-				
-				$this->UpdateFormField("Actors", "values", $jsValues );
-			}
+			
 		}
 	}
 ?>
