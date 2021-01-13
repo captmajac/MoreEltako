@@ -24,10 +24,10 @@ class GenericEEP extends IPSModule {
 		}
 		else 
 		{
-			UnregisterVariable("Data0");
-			UnregisterVariable("Data1");
-			UnregisterVariable("Data2");
-			UnregisterVariable("Data3");
+			$this->UnregisterVariable("Data0");
+			$this->UnregisterVariable("Data1");
+			$this->UnregisterVariable("Data2");
+			$this->UnregisterVariable("Data3");
 		}
 		
 		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
