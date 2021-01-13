@@ -145,18 +145,20 @@ class FTS12 extends GenericEEP
 		
 		// ggf. auch entscheiden was in der Liste aufgenommen werden soll
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
-		// überschreiben
+		//
 		public function updateList(string $DevID, object $data) {
 			// Device Liste als Buffer
 			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 			
 			$newValue = new stdClass;
-			$newValue->ID = $DevID;
-			$newValue->Reference = "not implemented"; 		// hier ggf. nach schon eingesetzter Enocean Referenz suchen
-			$newValue->Reference = $data->{'DataByte0'};
+			if ($data->{'DataByte0'}!="0")							// Bei Taster loslassen nicht aufnehmen
+			{
+				$newValue->ID = $DevID;
+				$newValue->Ident = $DevID."".$data->{'DataByte0'};	//identifier hier gleich der device id + Datenbyte <>00
+				$newValue->Reference = $data->{'DataByte0'}; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
+			}
 			
-			
-			if (@in_array($newValue->ID , array_column($values, 'ID') ) == false)
+			if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
 			{
 				$values[] = $newValue;
 				
