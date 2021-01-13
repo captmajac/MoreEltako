@@ -151,7 +151,7 @@ class FTS12 extends GenericEEP
 			
 			if ($DataByte!=null)
 			{
-				IPS_SetProperty ($this->InstanceID, "DataByte", "".dechex(@$DataByte));
+				IPS_SetProperty ($this->InstanceID, "0X00", "".dechex(@$DataByte));
 			}
 			
 			//Never delete this line!
