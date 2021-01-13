@@ -15,7 +15,7 @@ class GenericEEP extends IPSModule {
 		// Never delete this line!
 		parent::ApplyChanges ();
 
-		if ($this->ReadPropertyString("DataByte") == true)
+		if ($this->ReadPropertyBoolean("DataByte") == true)
 		{
 			$this->RegisterVariableInteger ( "Data0", "Data0" );
 			$this->RegisterVariableInteger ( "Data1", "Data1" );
@@ -55,7 +55,7 @@ class GenericEEP extends IPSModule {
 			$this->updateList($ValidDevID, $data);
 		}
 		else {
-			if ($this->ReadPropertyString("DataByte") == true)
+			if ($this->ReadPropertyBoolean("DataByte") == true)
 			{
 				$this->ProcessData ( $data );
 			}
