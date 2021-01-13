@@ -20,9 +20,9 @@ class FTS12 extends GenericEEP
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterVariableBoolean("Pressed", "Pressed");
-			$this->RegisterVariableBoolean("PressedLong", "PressedLong");
-			$this->RegisterVariableBoolean("PressedShort", "PressedShort");
+			$this->RegisterVariableBoolean("Pressed", false);
+			$this->RegisterVariableBoolean("PressedLong", false);
+			$this->RegisterVariableBoolean("PressedShort", false);
 			
 			//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
