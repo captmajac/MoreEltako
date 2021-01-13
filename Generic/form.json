@@ -32,6 +32,12 @@
 								"name": "Reference",
 								"width": "auto",
 								"add": ""
+							    }, {
+								"caption": "Ident",
+								"name": "Ident",
+								"width": "auto",
+								"visible ": false,
+								"add": ""
 							    }],
 							    "values": [
 								]
