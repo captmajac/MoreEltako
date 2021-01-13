@@ -151,7 +151,7 @@ class FTS12 extends GenericEEP
 			
 			if ($DataByte!=null)
 			{
-				IPS_SetProperty ($this->InstanceID, "0X00", "".dechex(@$DataByte));
+				IPS_SetProperty ($this->InstanceID, "0X00", "".$DataByte);
 			}
 			
 			//Never delete this line!
@@ -165,13 +165,13 @@ class FTS12 extends GenericEEP
 			// Device Liste als Buffer
 			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 			
-			
-			if ($data->{'DataByte0'}!="0")							// Bei Taster loslassen nicht aufnehmen
+			$DB=$data->{'DataByte0'};
+			if ($DB == hexdec("10") || $DB == hexdec("30") || $DB == hexdec("50") || $DB == hexdec("70"))							// Bei Taster loslassen nicht aufnehmen
 			{
 				$newValue = new stdClass;
 				$newValue->ID = $DevID;
 				$newValue->Ident = $DevID."".$data->{'DataByte0'};	//identifier hier gleich der device id + Datenbyte <>00
-				$newValue->Reference = $data->{'DataByte0'}; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
+				$newValue->Reference = dechex($data->{'DataByte0'}); 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
 				
 				if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
 				{
