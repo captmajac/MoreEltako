@@ -165,7 +165,7 @@ class FTS12 extends GenericEEP
 					"10"=>"unten links (0x10)" ,
 					"30"=>"oben links (0x30)" ,
 					"50"=>"unten rechts (0x50)" ,
-					"50"=>"oben rechts (0x70))" 
+					"70"=>"oben rechts (0x70))" 
 			);						
 				
 			// Device Liste als Buffer
@@ -176,7 +176,7 @@ class FTS12 extends GenericEEP
 			{
 				$newValue = new stdClass;
 				$newValue->ID = $DevID;
-				$newValue->Ident = $DevID."".$data->{'DataByte0'};	//identifier hier gleich der device id + Datenbyte <>00
+				$newValue->Ident = $DevID."".$DB;					// identifier hier gleich der device id + Datenbyte <>00
 				$newValue->Reference = $valuesRef[$DB]; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
 				
 				if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
