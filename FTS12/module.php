@@ -134,7 +134,7 @@ class FTS12 extends GenericEEP
 		public function GetConfigurationForm() {			
 			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 			
-			
+	
 			
 			//Never delete this line!
 			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// merge der form.json
@@ -144,8 +144,7 @@ class FTS12 extends GenericEEP
 		
 		
 		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
-		public function SetSelectedModul(object $List) {
-			
+		public function SetSelectedModul(object $List) {			
 			@$DataByte = $List["Reference"]; 		// Kommt ein Error bei keiner Auswahl
 			
 			if ($DataByte!=null)
@@ -161,16 +160,24 @@ class FTS12 extends GenericEEP
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
 		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function updateList(string $DevID, object $data) {
+			// referenzbeschriftungen
+			$valuesRef =array(
+					"10"=>"unten links (0x10)" ,
+					"30"=>"oben links (0x30)" ,
+					"50"=>"unten rechts (0x50)" ,
+					"50"=>"oben rechts (0x70))" 
+			);						
+				
 			// Device Liste als Buffer
 			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 			
 			$DB=$data->{'DataByte0'};
-			if ($DB == hexdec("10") || $DB == hexdec("30") || $DB == hexdec("50") || $DB == hexdec("70"))							// Bei Taster loslassen nicht aufnehmen
+			if (array_key_exists($DB, $valuesRef))							// in keys 
 			{
 				$newValue = new stdClass;
 				$newValue->ID = $DevID;
 				$newValue->Ident = $DevID."".$data->{'DataByte0'};	//identifier hier gleich der device id + Datenbyte <>00
-				$newValue->Reference = dechex($data->{'DataByte0'}); 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
+				$newValue->Reference = $valuesRef[dechex($data->{'DataByte0'})]; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
 				
 				if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
 				{
