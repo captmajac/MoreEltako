@@ -10,6 +10,7 @@ class FTS12 extends GenericEEP
 			
 			
 			$this->RegisterPropertyString("0X00", "");
+			$this->RegisterPropertyString("Data0X00", "");
 	
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
@@ -152,6 +153,7 @@ class FTS12 extends GenericEEP
 			if ($DataByte!=null)
 			{
 				IPS_SetProperty ($this->InstanceID, "0X00", "".$DataByte);
+				IPS_SetProperty ($this->InstanceID, "Data0X00", "".$DataByte);
 			}
 			
 			//Never delete this line!

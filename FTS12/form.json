@@ -1,7 +1,15 @@
 {
 	"elements":
 	[
-		{ "name": "0X00", "type": "ValidationTextBox", "caption": "0X?? (HEX):" }
+		{ "name": "0X00", "type": "ValidationTextBox", "caption": "0X?? (HEX):" },
+		{ "type": "Select", "name": "Data0X00", "caption": "Function:",
+ 		   "options": [
+		        { "caption": "unten links (0x10)", "value": "10" },
+		        { "caption": "oben links (0x30)", "value": "30" },
+		        { "caption": "unten rechts (0x50)", "value": "50" },
+		        { "caption": "oben rechts (0x70)", "value": "70" }
+    		]
+}
     		
 	]
 }
