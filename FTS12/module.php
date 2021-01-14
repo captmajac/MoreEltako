@@ -3,6 +3,13 @@ require_once __DIR__ . '/../Generic/module.php';  // Base Module.php
 
 class FTS12 extends GenericEEP
 	{
+		protected static $valuesRef =array(
+				"10"=>"unten links (0x10)" ,
+				"30"=>"oben links (0x30)" ,
+				"50"=>"unten rechts (0x50)" ,
+				"70"=>"oben rechts (0x70))"
+		);	
+		
 		public function Create() 
 		{
 			//Never delete this line!
@@ -149,7 +156,9 @@ class FTS12 extends GenericEEP
 			
 			if ($DataByte!=null)
 			{
-				IPS_SetProperty ($this->InstanceID, "Data0X00", "".$DataByte);
+				
+				static::$valuesRef
+				IPS_SetProperty ($this->InstanceID, "Data0X00", "".array_search($DataByte, static::$valuesRef));
 			}
 			
 			//Never delete this line!
@@ -160,24 +169,17 @@ class FTS12 extends GenericEEP
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
 		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function updateList(string $DevID, object $data) {
-			// referenzbeschriftungen
-			$valuesRef =array(
-					"10"=>"unten links (0x10)" ,
-					"30"=>"oben links (0x30)" ,
-					"50"=>"unten rechts (0x50)" ,
-					"70"=>"oben rechts (0x70))" 
-			);						
-				
+									
 			// Device Liste als Buffer
 			$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 			
 			$DB=dechex($data->{'DataByte0'});
-			if (array_key_exists($DB, $valuesRef))							// in keys 
+			if (array_key_exists($DB, static::$valuesRef))							// in keys 
 			{
 				$newValue = new stdClass;
 				$newValue->ID = $DevID;
-				$newValue->Ident = $DevID."".$DB;					// identifier hier gleich der device id + Datenbyte <>00
-				$newValue->Reference = $valuesRef[$DB]; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
+				$newValue->Ident = $DevID."".$DB;							// identifier hier gleich der device id + Datenbyte <>00
+				$newValue->Reference = static::$valuesRef[$DB]; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
 				
 				if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
 				{
