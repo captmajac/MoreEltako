@@ -8,8 +8,6 @@ class FTS12 extends GenericEEP
 			//Never delete this line!
 			parent::Create();
 			
-			
-			$this->RegisterPropertyString("0X00", "");
 			$this->RegisterPropertyString("Data0X00", "");
 	
 			//Connect to available enocean gateway
@@ -50,7 +48,7 @@ class FTS12 extends GenericEEP
 				
 			// prüfen 
 			// ob das Datenbyte0 in HEX=50 oder 70 ist. dies unterscheidet FTS12 wippen
-			if (strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("0X00")) === 0)
+			if (strcmp(dechex($data->{'DataByte0'}), $this->ReadPropertyString("Data0X00")) === 0)
 			{
 				$this->ProcessPress($data);
 			}
@@ -152,7 +150,6 @@ class FTS12 extends GenericEEP
 			
 			if ($DataByte!=null)
 			{
-				IPS_SetProperty ($this->InstanceID, "0X00", "".$DataByte);
 				IPS_SetProperty ($this->InstanceID, "Data0X00", "".$DataByte);
 			}
 			

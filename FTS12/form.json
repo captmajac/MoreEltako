@@ -1,7 +1,6 @@
 {
 	"elements":
 	[
-		{ "name": "0X00", "type": "ValidationTextBox", "caption": "0X?? (HEX):" },
 		{ "type": "Select", "name": "Data0X00", "caption": "Function:",
  		   "options": [
 		        { "caption": "unten links (0x10)", "value": "10" },
