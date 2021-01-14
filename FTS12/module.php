@@ -157,7 +157,6 @@ class FTS12 extends GenericEEP
 			if ($DataByte!=null)
 			{
 				
-				static::$valuesRef
 				IPS_SetProperty ($this->InstanceID, "Data0X00", "".array_search($DataByte, static::$valuesRef));
 			}
 			
