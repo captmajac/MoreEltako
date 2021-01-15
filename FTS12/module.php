@@ -17,7 +17,7 @@ class FTS12 extends GenericEEP
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
 			
-			//Never delete this line!
+			//Never delete this lines!
 			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// Modul für parent merken
 			$this->SetBuffer("Module", $Module["prefix"]);
 			parent::Create();
@@ -62,8 +62,8 @@ class FTS12 extends GenericEEP
 				$this->ProcessPress($data);
 			}
 			// prüfen ob Datenbyte0=0 ist dann Taste losgelassen
-			// vorher prüfen ob pressed auch true war nur dann wurde kann der taster sicherer erkannt werden
-			// hinweis: dennoch nicht ganz safe wenn die taster mit byte 50/70 gleichzeitig gedrück werden
+			// vorher prüfen ob pressed auch true war nur dann kann der taster erkannt werden
+			// hinweis: dennoch nicht ganz safe wenn die taster mit unterschiedlichen bytes gleichzeitig gedrück werden
 			else if (strcmp(dechex($data->{'DataByte0'}), "0") === 0
 			and GetValue($this->GetIDForIdent("Pressed"))==true)
 			{
@@ -80,7 +80,6 @@ class FTS12 extends GenericEEP
 
 		private function ProcessRelease($Data)
 		{ 	// daten auswerten ->taste losgelassen
-			// wenn eine identische deviceid im datenbyte0 mit 50 und eine mit 70 gleichzeitig gedrückt werden kann eine unschärfe entstehen
 			
 			// zeit different ausrechnen für kurzer langer tastendruck
 			$diff= microtime(true) - IPS_GetVariable($this->GetIDForIdent("Pressed"))['VariableUpdated'];
@@ -122,7 +121,7 @@ class FTS12 extends GenericEEP
 		public function GetConfigurationForm() {			
 			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
 			
-			//Never delete this line!
+			//Never delete this lines!
 			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// merge der form.json
 			$NewForm = parent::AddConfigurationForm($Form, $Module["prefix"]);
 			return json_encode($NewForm);
@@ -131,11 +130,10 @@ class FTS12 extends GenericEEP
 		
 		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function SetSelectedModul(object $List) {			
-			@$DataByte = $List["Reference"]; 		// Kommt ein Error bei keiner Auswahl
+			@$DataByte = $List["Reference"]; 		// Error bei keiner Auswahl
 			
 			if ($DataByte!=null)
-			{
-				
+			{		
 				IPS_SetProperty ($this->InstanceID, "Data0X00", "".array_search($DataByte, static::$valuesRef));
 			}
 			
@@ -143,7 +141,7 @@ class FTS12 extends GenericEEP
 			parent::SetSelectedModul($List);
 		}
 		
-		//  entscheiden was in der Liste aufgenommen werden soll
+		// entscheiden was in der Liste aufgenommen werden soll
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
 		// hier überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function updateList(string $DevID, object $data) {
