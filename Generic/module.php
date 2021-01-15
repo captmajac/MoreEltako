@@ -11,8 +11,8 @@ class GenericEEP extends IPSModule {
 		$Module = $this->GetBuffer("Module");
 		if ($Module== "")
 		{	// default this Module
-			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// Modul für parent merken
-			$this->SetBuffer("Module", $Module["prefix"]);
+			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true)["prefix"]; 	// Modul für parent merken
+			$this->SetBuffer("Module", $Module);
 		}
 		$this->RegisterTimer("SearchTime",0,$Module."_TimerEvent(\$_IPS['TARGET']);");
 
