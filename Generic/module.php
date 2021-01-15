@@ -6,7 +6,15 @@ class GenericEEP extends IPSModule {
 		parent::Create ();
 		$this->RegisterPropertyString ( "DeviceID", "" );
 		$this->RegisterPropertyBoolean ( "DataByte", false);
-		$this->RegisterTimer("SearchTime",0,"GenericEEP_TimerEvent(\$_IPS['TARGET']);");
+		
+		// modulaufruf ändern
+		$Module = $this->GetBuffer("Module");
+		if ($Module== "")
+		{	// default this Module
+			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// Modul für parent merken
+			$this->SetBuffer("Module", $Module["prefix"]);
+		}
+		$this->RegisterTimer("SearchTime",0,$Module."_TimerEvent(\$_IPS['TARGET']);");
 
 		// Connect to available enocean gateway
 		$this->ConnectParent ( "{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}" );
@@ -163,6 +171,7 @@ class GenericEEP extends IPSModule {
 		
 		// funktionsaufruf in form ändern ändern
 		$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true);
+		$NewModule = $this->GetBuffer("Module");
 		
 		$file = file_get_contents(__DIR__ . '/form.json');
 		$file = str_replace($Module["prefix"]."_", $NewModule."_", $file);

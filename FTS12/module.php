@@ -12,13 +12,15 @@ class FTS12 extends GenericEEP
 		
 		public function Create() 
 		{
-			//Never delete this line!
-			parent::Create();
-			
 			$this->RegisterPropertyString("Data0X00", "");
 	
 			//Connect to available enocean gateway
 			$this->ConnectParent("{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}");
+			
+			//Never delete this line!
+			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// Modul für parent merken
+			$this->SetBuffer("Module", $Module["prefix"]);
+			parent::Create();
 		}
     
 		public function ApplyChanges()
@@ -115,33 +117,10 @@ class FTS12 extends GenericEEP
 			
 		}
 		
-		protected function SendDebug($Message, $Data, $Format)
-		{
-			if (is_array($Data))
-			{
-			    foreach ($Data as $Key => $DebugData)
-			    {
-						$this->SendDebug($Message . ":" . $Key, $DebugData, 0);
-			    }
-			}
-			else if (is_object($Data))
-			{
-			    foreach ($Data as $Key => $DebugData)
-			    {
-						$this->SendDebug($Message . "." . $Key, $DebugData, 0);
-			    }
-			}
-			else
-			{
-			    parent::SendDebug($Message, $Data, $Format);
-			}
-		} 
 		
 		// form auslesen und dann dynamisch erweitern
 		public function GetConfigurationForm() {			
 			$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-			
-	
 			
 			//Never delete this line!
 			$Module= json_decode(file_get_contents(__DIR__ . '/module.json'), true); 	// merge der form.json
@@ -164,9 +143,9 @@ class FTS12 extends GenericEEP
 			parent::SetSelectedModul($List);
 		}
 		
-		// ggf. auch entscheiden was in der Liste aufgenommen werden soll
+		//  entscheiden was in der Liste aufgenommen werden soll
 		// z.b. Filter auf spezielle Geräte oder EEPs dann muss auch $data ausgewertet werden
-		// überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
+		// hier überschreiben um nur Tasterinstanzen mit 10,30,50,70 anzuzeigen
 		public function updateList(string $DevID, object $data) {
 									
 			// Device Liste als Buffer
