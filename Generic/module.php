@@ -149,8 +149,7 @@ class GenericEEP extends IPSModule {
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
 		$newValue->Ident = $DevID;						//identifier hier gleich der device id	
-		$newValue->Reference = "not implemented"; 		// hier ggf. nach schon eingesetzter Enocean Referenz suchen
-
+		$newValue->Reference = dechex($data->{'DataByte3'})."-".dechex($data->{'DataByte2'})."-"-dechex($data->{'DataByte1'})."-".dechex($data->{'DataByte0'});
 			
 		if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
 		{
