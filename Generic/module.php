@@ -151,10 +151,10 @@ class GenericEEP extends IPSModule {
 		$newValue->Ident = $DevID;						//identifier hier gleich der device id	
 
 		// Add Info alle Daten anzeigen
-		$AddInfo = strtoupper(str_pad(dechex ( $data->{'DataByte3'}), 2, 0, STR_PAD_LEFT) );
-		$AddInfo = $AddInfo."-".strtoupper(str_pad(dechex ( $data->{'DataByte2'}), 2, 0, STR_PAD_LEFT) );
+		$AddInfo = strtoupper(str_pad(dechex ( $data->{'DataByte0'}), 2, 0, STR_PAD_LEFT) );
 		$AddInfo = $AddInfo."-".strtoupper(str_pad(dechex ( $data->{'DataByte1'}), 2, 0, STR_PAD_LEFT) );
-		$AddInfo = $AddInfo."-".strtoupper(str_pad(dechex ( $data->{'DataByte0'}), 2, 0, STR_PAD_LEFT) );
+		$AddInfo = $AddInfo."-".strtoupper(str_pad(dechex ( $data->{'DataByte2'}), 2, 0, STR_PAD_LEFT) );
+		$AddInfo = $AddInfo."-".strtoupper(str_pad(dechex ( $data->{'DataByte3'}), 2, 0, STR_PAD_LEFT) );
 		$newValue->Reference = $AddInfo;
 		
 		if (@in_array($newValue->Ident , array_column($values, 'Ident') ) == false)
