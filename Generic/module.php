@@ -1,6 +1,7 @@
 <?php
 class GenericEEP extends IPSModule {
 	
+	// erstellung
 	public function Create() {
 		// Never delete this line!
 		parent::Create ();
@@ -19,6 +20,8 @@ class GenericEEP extends IPSModule {
 		// Connect to available enocean gateway
 		$this->ConnectParent ( "{A52FEFE9-7858-4B8E-A96E-26E15CB944F7}" );
 	}
+	
+	// changes der instanz
 	public function ApplyChanges() {
 		// Never delete this line!
 		parent::ApplyChanges ();
@@ -70,7 +73,8 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-	private function ProcessData($data) { // daten auswerten ->taste gedrückt
+	// einfache datenauswertung
+	private function ProcessData($data) { 
 	                                      
 		SetValue ( $this->GetIDForIdent ( "Data0" ), $data->{'DataByte0'} );
 		SetValue ( $this->GetIDForIdent ( "Data1" ), $data->{'DataByte1'} );
@@ -92,7 +96,7 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-
+	// start/stop der geräte suche
 	public function SearchModules(string $state) {
 		
 		if ($state=="true")
@@ -112,11 +116,12 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-	// timer aufruf, suchzeit abgelaufen
+	// timer aufruf, geräte suche abgelaufen
 	public function TimerEvent() {
 		$this->SearchModules("false");
 	} 
 	
+	// auswahl aus der search liste
 	public function SetSelectedModul(object $List) {
 
 		@$DevID = $List["ID"]; 		// Kommt ein Error bei keiner Auswahl
@@ -158,15 +163,7 @@ class GenericEEP extends IPSModule {
 		}
 	}
 	
-	/*
-	// form dynamisch erweitern
-	public function GetConfigurationForm() {
-		
-		$Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-		return json_encode($Form);
-	}
-*/
-	
+	// merge von form.json 
 	public function AddConfigurationForm(array $ChildForm, string $NewModule) {
 		
 		// funktionsaufruf in form ändern ändern
@@ -187,6 +184,7 @@ class GenericEEP extends IPSModule {
 		if (array_key_exists("actions", $Form) ==false){$Form["actions"] = array();};
 		
 		// Arrays ersetzen
+		$NewForm = array();
 		$NewForm["elements"]= array_merge($ChildForm["elements"], $Form["elements"]);
 		$NewForm["status"]= array_merge($ChildForm["status"], $Form["status"]);
 		$NewForm["actions"]= array_merge($ChildForm["actions"], $Form["actions"]);
