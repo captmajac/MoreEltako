@@ -115,15 +115,13 @@ class GenericEEP extends IPSModule {
 			$this->SetBuffer("Serach", "");
 			$this->UpdateFormField("TimeLabel", "caption", "Suche abgelaufen" );
 			$this->SetTimerInterval("SearchTime", 0);
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 		}
 	}
 	
 	// timer aufruf, geräte suche abgelaufen
 	public function TimerEvent() {
 		$this->SearchModules("false");
-		// filter erneut setzen, da mit apply changes der suchdialog geschlossen wird.
-		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
-		
 	} 
 	
 	// auswahl aus der search liste
