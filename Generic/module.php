@@ -41,7 +41,9 @@ class GenericEEP extends IPSModule {
 			$this->UnregisterVariable("Data3");
 		}
 		
+
 		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+		
 	}
 
 	/*
@@ -119,6 +121,7 @@ class GenericEEP extends IPSModule {
 	// timer aufruf, geräte suche abgelaufen
 	public function TimerEvent() {
 		$this->SearchModules("false");
+		IPS_ApplyChanges($this->InstanceID);
 	} 
 	
 	// auswahl aus der search liste
