@@ -121,7 +121,9 @@ class GenericEEP extends IPSModule {
 	// timer aufruf, geräte suche abgelaufen
 	public function TimerEvent() {
 		$this->SearchModules("false");
-		IPS_ApplyChanges($this->InstanceID);
+		// filter erneut setzen, da mit apply changes der suchdialog geschlossen wird.
+		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+		
 	} 
 	
 	// auswahl aus der search liste
