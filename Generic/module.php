@@ -42,7 +42,7 @@ class GenericEEP extends IPSModule {
 		}
 		
 		// noch bug
-		$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
+		$this->SetReceiveDataFilter(".*\"DeviceID\":".$this->GetID().".*");
 		//$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
 
 		
@@ -117,7 +117,7 @@ class GenericEEP extends IPSModule {
 			$this->SetBuffer("Serach", "");
 			$this->UpdateFormField("TimeLabel", "caption", "Suche abgelaufen" );
 			$this->SetTimerInterval("SearchTime", 0);
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".$this->GetID().".*");
 		}
 	}
 	
