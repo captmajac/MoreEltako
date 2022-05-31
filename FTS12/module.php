@@ -155,6 +155,7 @@ class FTS12 extends GenericEEP
 				$newValue = new stdClass;
 				// fix 64 bit 
 				if($DevID & 0x80000000)$DevID -=  0x100000000;
+				echo $DevID."\n";
 				$newValue->ID = $DevID;
 				$newValue->Ident = $DevID."".$DB;							// identifier hier gleich der device id + Datenbyte <>00
 				$newValue->Reference = static::$valuesRef[$DB]; 			// hier ggf. nach schon eingesetzter Enocean Referenz suchen
