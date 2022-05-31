@@ -152,7 +152,9 @@ class GenericEEP extends IPSModule {
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
 		
 		// fix 64 bit 
-		if($DevID & 0x80000000)$DevID -=  0x100000000;
+		//$DevIDInt = (int)hexdec($DevID);
+		//if($DevIDInt & 0x80000000)$DevIDInt -=  0x100000000;
+		$DevID = substr($DevID,8);
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
