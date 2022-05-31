@@ -156,7 +156,7 @@ class FTS12 extends GenericEEP
 				// fix 64 bit 
 				$DevIDInt = (int)hexdec($DevID);
 				if($DevIDInt & 0x80000000)$DevIDInt -=  0x100000000;
-				$DevID = dechex($DevIDInt);
+				$DevID = substr($DevID,8);
 				
 				$newValue->ID = $DevID;
 				$newValue->Ident = $DevID."".$DB;							// identifier hier gleich der device id + Datenbyte <>00
