@@ -41,8 +41,8 @@ class GenericEEP extends IPSModule {
 			$this->UnregisterVariable("Data3");
 		}
 		
-
-		$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
+		// noch bug
+		//$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
 		
 	}
 
