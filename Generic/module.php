@@ -115,7 +115,7 @@ class GenericEEP extends IPSModule {
 			$this->SetBuffer("Serach", "");
 			$this->UpdateFormField("TimeLabel", "caption", "Suche abgelaufen" );
 			$this->SetTimerInterval("SearchTime", 0);
-			$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+			$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
 		}
 	}
 	
@@ -148,6 +148,9 @@ class GenericEEP extends IPSModule {
 	public function updateList(string $DevID, object $data) {
 		// Device Liste als Buffer 
 		$values = json_decode($this->GetBuffer("List"));//json_decode( $this );
+		
+		// fix 64 bit 
+		if($DevID & 0x80000000)$DevID -=  0x100000000;
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
@@ -199,6 +202,14 @@ class GenericEEP extends IPSModule {
 		
 		return $NewForm;
 	}
+	
+	// fix copied from MoreEnocean, wg. 64 Bit Pi
+ 	private function GetID() 
+ 	{
+ 		$ID = (int)hexdec($this->ReadPropertyString("DeviceID"));
+ 		if($ID & 0x80000000)$ID -=  0x100000000;
+         return($ID);
+ 	}
 	
 }
 ?>
