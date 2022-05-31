@@ -210,7 +210,7 @@ class GenericEEP extends IPSModule {
  	{
  		$ID = (int)hexdec($this->ReadPropertyString("DeviceID"));
  		//if($ID & 0x80000000)$ID -=  0x100000000;
-		//if($ID < 0)$ID -=  18446744069414584320;
+		if($ID < 0)$ID +=  4026531840;
          return($ID);
  	}
 	
