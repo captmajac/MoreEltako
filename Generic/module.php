@@ -43,6 +43,8 @@ class GenericEEP extends IPSModule {
 		
 		// noch bug
 		//$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID().".*");
+		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+
 		
 	}
 
@@ -207,7 +209,8 @@ class GenericEEP extends IPSModule {
  	private function GetID() 
  	{
  		$ID = (int)hexdec($this->ReadPropertyString("DeviceID"));
- 		if($ID & 0x80000000)$ID -=  0x100000000;
+ 		//if($ID & 0x80000000)$ID -=  0x100000000;
+		if($ID < 0)$ID -=  18446744069414584320
          return($ID);
  	}
 	
