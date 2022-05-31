@@ -42,7 +42,7 @@ class GenericEEP extends IPSModule {
 		}
 		
 
-		$this->SetReceiveDataFilter(".*\"DeviceID\":".(int)hexdec($this->ReadPropertyString("DeviceID")).".*");
+		$this->SetReceiveDataFilter(".*\"DeviceID\":".GetID()).".*");
 		
 	}
 
