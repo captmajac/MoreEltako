@@ -154,7 +154,7 @@ class GenericEEP extends IPSModule {
 		// fix 64 bit 
 		//$DevIDInt = (int)hexdec($DevID);
 		//if($DevIDInt & 0x80000000)$DevIDInt -=  0x100000000;
-		$DevID = substr($DevID,8);
+		//$DevID = substr($DevID,8);
 		
 		$newValue = new stdClass;
 		$newValue->ID = $DevID;
