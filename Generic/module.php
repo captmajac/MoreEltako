@@ -210,9 +210,11 @@ class GenericEEP extends IPSModule {
 	// fix copied from MoreEnocean, wg. 64 Bit Pi
  	private function GetID() 
  	{
- 		$ID = (int)hexdec($this->ReadPropertyString("DeviceID"));
- 		if($ID & 0x80000000)$ID -=  0x100000000;	
-         return($ID);
+		$ID = hexdec($this->ReadPropertyString("DeviceID"));
+		if(IPS_GetKernelVersion() < 6.3){
+			if($ID & 0x80000000)$ID -=  0x100000000;
+		}
+		return($ID);
  	}
 	
 }
