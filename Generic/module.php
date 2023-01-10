@@ -66,7 +66,14 @@ class GenericEEP extends IPSModule {
 		if ($this->GetBuffer("Serach")=="true")
 		{
 			// führende Nullen und in 8 Zeichen Grossbuchstaben formatieren
-			$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
+			//$ValidDevID = strtoupper(str_pad(dechex ( $data->{'DeviceID'}), 8, 0, STR_PAD_LEFT) );
+			
+			// copy from moreenocean
+			$ID = $data->DeviceID - $data->DeviceID%16 + 1;
+			if($ID <= 0)return true;
+			$DeviceID = sprintf('%08X',$ID);
+			$ValidDevID = $DeviceID;
+				
 			$this->updateList($ValidDevID, $data);
 		}
 		else {
